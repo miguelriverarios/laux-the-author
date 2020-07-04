@@ -165,8 +165,28 @@
 <script>
 
   var url = 'https://script.google.com/macros/s/AKfycbygYiSXlhf4EtyPgYTKoW1atdOL0hZueTAP1jgPaQlYmRYFoNaU/exec';
+  var svgObj = document.getElementById("svg2");
+  var svgjObj = $("object").contents().find("svg");
+
+
+  //var hammertime = new Hammer(svgObj);
+  //var hammertime = new Hammer.Manager(svgObj);
+  //var pinch = new Hammer.Pinch();
+
+  //hammertime.add([pinch]);
+
+  //hammertime.on("pinch", function(ev) {
+  //  console.log(ev);
+  //});
 
   function objectOnClick(initCountryCode, storiesSummaryObj) {
+    var hammertime = $("object").contents().find("svg").hammer();
+
+   // $("object").contents().find("svg").hammer().on("panleft panright tap press", function(event) {
+    //callback
+  //  console.log(event.type);
+//});
+
     $("object").contents().find('#' + initCountryCode).addClass('clicked');
 
     if (storiesSummaryObj) {
@@ -249,18 +269,25 @@
     var scale = 1;
 
     function wheelHandler(e, sign) {
+      var step = e.type == 'pinch' ? 0.02 : 0.05;
       e.preventDefault();
 
       if (e.type == 'click' || e.type == 'mousedown') {
         e.deltaY = 100 * sign;
       }
 
+      if (e.type == 'pinch') {
+        e.offsetX = e.center.x;
+        e.offsetY = e.center.y;
+        e.deltaY = e.additionalEvent == 'pinchin' ? 1 : -1;
+      }
+
       var w = viewBox.w;
       var h = viewBox.h;
       var mx = e.offsetX;//mouse x  
       var my = e.offsetY;
-      var dw = w * Math.sign(e.deltaY) * 0.05;
-      var dh = h * Math.sign(e.deltaY) * 0.05;
+      var dw = w * Math.sign(e.deltaY) * step;
+      var dh = h * Math.sign(e.deltaY) * step;
       var dx = dw * mx / svgSize.w;
       var dy = dh * my / svgSize.h;
       viewBox = { x: viewBox.x + dx, y: viewBox.y + dy, w: viewBox.w - dw, h: viewBox.h - dh };
@@ -281,12 +308,28 @@
 
     //Unable to use jQuery because cannot force active listening
     $("object").contents().find("svg")[0].addEventListener('wheel', wheelHandler, { passive: false });
+    
+    var el = document.querySelector("object").contentDocument.getElementById("svg2");
+    var ham = new Hammer(el, {domEvents: true});
+    
+    ham.get('pinch').set({enable:true});
 
+    ham.on('pinch', wheelHandler);
 
     svgImage.onmousedown = function (e) {
       isPanning = true;
       startPoint = { x: e.x, y: e.y };
     }
+
+    hammertime.on("touchstart", function(e) {
+      var touches = e.touches;
+      var firstTouch = touches[0];
+      //console.log(e.type);
+      //console.log(e);
+      isPanning = true;
+      //startPoint = { x: e.gesture.center.x, y: e.gesture.center.y };
+      startPoint = { x: firstTouch.pageX, y: firstTouch.pageY };
+    });
 
     svgImage.onmousemove = function (e) {
       if (isPanning) {
@@ -298,6 +341,19 @@
       }
     }
 
+    hammertime.on("touchmove", function(e) {
+      var touches = e.touches;
+      var firstTouch = touches[0];
+      //console.log(event.type);
+      if (isPanning) {
+        endPoint = { x: firstTouch.pageX, y: firstTouch.pageY };
+        var dx = (startPoint.x - endPoint.x) / scale;
+        var dy = (startPoint.y - endPoint.y) / scale;
+        var movedViewBox = { x: viewBox.x + dx, y: viewBox.y + dy, w: viewBox.w, h: viewBox.h };
+        svgImage.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${movedViewBox.w} ${movedViewBox.h}`);
+      }
+    });
+
     svgImage.onmouseup = function (e) {
       if (isPanning) {
         endPoint = { x: e.x, y: e.y };
@@ -308,6 +364,21 @@
         isPanning = false;
       }
     }
+
+    hammertime.on("touchend", function(e) {
+      var touches = e.changedTouches;
+      var firstTouch = touches[0];
+      //console.log(event);
+      //console.log(event.type);
+      if (isPanning) {
+        endPoint = { x: firstTouch.pageX, y: firstTouch.pageY };
+        var dx = (startPoint.x - endPoint.x) / scale;
+        var dy = (startPoint.y - endPoint.y) / scale;
+        viewBox = { x: viewBox.x + dx, y: viewBox.y + dy, w: viewBox.w, h: viewBox.h };
+        svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
+        isPanning = false;
+      }
+    });
 
     svgImage.onmouseleave = function (e) {
       isPanning = false;
