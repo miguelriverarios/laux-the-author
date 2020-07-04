@@ -280,7 +280,7 @@
     });
 
     //Unable to use jQuery because cannot force active listening
-    //$("object").contents().find("svg")[0].addEventListener('wheel', wheelHandler, { passive: false });
+    $("object").contents().find("svg")[0].addEventListener('wheel', wheelHandler, { passive: false });
 
 
     svgImage.onmousedown = function (e) {
