@@ -1,0 +1,88 @@
+<div class="mdc-tab-bar" role="tablist" style="z-index:1000;" data-mdc-auto-init="MDCTabBar">
+
+    {{> progressBar }}
+
+    <div class="tab-container">
+        {{> logo }}
+
+        <div class="mdc-tab-scroller">
+            <div class="mdc-tab-scroller__scroll-area">
+                <div class="mdc-tab-scroller__scroll-content">
+
+                    <a id="my-story-tab" href="/my-story"
+                    class="{{isActiveTabClass type 'my-story'}}"
+                        role="tab" aria-selected="{{isActiveBoolean type 'my-story'}}"
+                        tabindex="{{isActiveIndex type 'my-story'}}" aria-controls="my-story"
+                        data-mdc-auto-init="MDCTab">
+                        <span class="mdc-tab__content">
+                            <span class="default-tab-color mdc-tab__text-label">My Story</span>
+                        </span>
+                        <span class="{{isActiveIndicatorClass type 'my-story'}}">
+                            <span id="my-story-indicator"
+                                class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span id="my-story-ripple" class="mdc-tab__ripple"></span>
+                    </a>
+                    <span class="pipe">|</span>
+                    <a id="our-story-tab" href="/our-story"
+                        class="{{isActiveTabClass type 'our-story'}} progress-bar-click" role="tab"
+                        aria-selected="{{isActiveBoolean type 'our-story'}}"
+                        tabindex="{{isActiveIndex type 'our-story'}}" aria-controls="our-story">
+                        <span class="mdc-tab__content">
+                            <span class="default-tab-color mdc-tab__text-label">Our Story</span>
+                        </span>
+                        <span class="{{isActiveIndicatorClass type 'our-story'}}">
+                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                    </a>
+                    <span class="pipe">|</span>
+                    <a id="my-media-tab" href="/my-media"
+                        class="{{isActiveTabClass type 'my-media'}} progress-bar-click" role="tab"
+                        aria-selected="{{isActiveBoolean type 'my-media'}}" tabindex="{{isActiveIndex type 'my-media'}}"
+                        aria-controls="my-media">
+                        <span class="mdc-tab__content">
+                            <span class="default-tab-color mdc-tab__text-label">My Media</span>
+                        </span>
+                        <span class="{{isActiveIndicatorClass type 'my-media'}}">
+                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                    </a>
+                    <span class="pipe">|</span>
+                    <a id="events-tab" href="/events"
+                        class="{{isActiveTabClass type 'events'}} progress-bar-click" role="tab"
+                        aria-selected="{{isActiveBoolean type 'events'}}" tabindex="{{isActiveIndex type 'events'}}"
+                        aria-controls="events">
+                        <span class="mdc-tab__content">
+                            <span class="default-tab-color mdc-tab__text-label">Upcoming Events</span>
+                        </span>
+                        <span class="{{isActiveIndicatorClass type 'events'}}">
+                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                    </a>
+                    <span class="pipe">|</span>
+                    <a id="urban-glossary-tab" href="/urban-glossary"
+                        class="{{isActiveTabClass type 'urban-glossary'}} progress-bar-click"
+                        role="tab" aria-selected="{{isActiveBoolean type 'urban-glossary'}}"
+                        tabindex="{{isActiveIndex type 'urban-glossary'}}" aria-controls="urban-glossary">
+                        <span class="mdc-tab__content">
+                            <span class="default-tab-color mdc-tab__text-label">Urban Glossary</span>
+                        </span>
+                        <span class="{{isActiveIndicatorClass type 'urban-glossary'}}">
+                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                    </a>
+
+                    <a class="overflow-menu">
+                        <button id="overflow-menu"
+                            class="tab-bar-icon material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

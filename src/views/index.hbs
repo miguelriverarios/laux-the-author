@@ -1,0 +1,103 @@
+{{!-- <section class="fill-screen"> --}}
+<section style="height:calc(100vh - 52px);padding:0;position:relative;background-color:#F3B534;">
+   <div id="left-splash" style="left:0;position:absolute;top:0;right:0;bottom:0;z-index:1;">
+     <span style="background-image:url('../../images/LAUX-color/LAUX-color/main-bg.png');position:absolute;left:0;top:0;right:0;bottom:0;display:block;background-size:contain;background-repeat:no-repeat;">
+    </span>
+   </div>
+   <div id="lines-splash" style="left:0;position:absolute;top:0;right:0;bottom:0;z-index:2;">
+     <span style="background-image:url('../../images/LAUX-color/LAUX-color/lines-bg.png');position:absolute;left:0;top:0;right:0;bottom:0;display:block;background-size:contain;background-repeat:no-repeat;">
+    </span>
+   </div>
+  <div id="hero-logo-container" style="position:absolute;top:0;right:0;bottom:0;">
+    <span id="hero-logo"
+    style="background-image:url('../../images/book-cover-light.png');position:absolute;left:0;top:0;right:0;bottom:0;display:block;background-position:center;background-size:cover;">
+    </span>
+  </div>
+
+  <div class="descriptors">
+    <div class="descriptor">Black</div>
+    <span class="space"></span>
+    <div class="descriptor">Womanist</div>
+    <span class="space"></span>
+    <div class="descriptor">Truth Teller</div>
+    <span class="space"></span>
+    <div class="descriptor">Lover</div>
+    <span class="space"></span>
+    <div class="descriptor">Sex-Positive</div>
+    <span class="space"></span>
+    <div class="descriptor">
+      <a class="default-link final-descriptor progress-bar-click" href="/my-story">
+        Author
+      </a>
+    </div>
+
+   {{!-- <a id="splash-fab" href="/purchase-your-copy"
+    class="mdc-fab mdc-fab--extended progress-bar-click" data-mdc-auto-init="MDCRipple">
+    <div class="mdc-fab__ripple"></div>
+    <span class="mdc-fab__label">Purchase Your Copy</span>
+  </a>  --}}
+  </div>
+
+
+  {{!-- <img class="fill-screen" id="left-image" src="../../images/laux-landing-page.png" alt="Laux Logo" width="80%"> --}}
+
+  {{!-- <img class="fill-screen" id="right-image" src="../../images/book-cover.jpg" alt="Book Cover" width="100%"> --}}
+
+</section>
+
+<div id="social-media-marquee-container">
+  <div id="social-media-marquee">
+
+  {{#each socialMediaPosts}}
+  <a class="marquee-item default-link" href="{{linkToPost}}" style="{{style}}">
+    <div class="username">{{username}} via {{platform}}</div>
+
+    {{#if isImage}}
+    <img class="social-media-image" src="{{image}}" alt="{{altText}}">
+    {{else}}
+    <div>{{post}}</div>
+    {{/if}}
+
+    <div class="timestamp">{{timestamp}}</div>
+  </a>
+  {{/each}}
+</div>
+</div>
+
+<div id="highlights">
+
+  <a class="default-link highlights-link" href="/to-all-the-places-ive-had-sex-before">
+    <div class="icon image-and-caption">
+      <div class="image-caption">
+        <i class="fa fa-chevron-down"></i>
+        <div>&nbsp;Read More About It</div>
+      </div>
+
+      <img class="image" src="../../images/temp-book-cover.png" alt="To All the Places I've Had Sex Cover"
+        height="300px">
+    </div>
+  </a>
+  <div>
+    <div class="image-description">
+      <i class="fa fa-quote fa-quote-left mdc-theme--primary fa-3x" aria-hidden="true"
+        style="align-self: flex-start;"></i>
+      <div>
+        <p>
+          To All The Places I’ve Had Sex Before is
+          an shockingly honest narrative of a
+          young woman’s exploration into her
+          sexuality and sexual history. It
+          paints is a refreshing and poignant
+          image of the truth behind the sexual
+          experiences shared by many young women today.
+        </p>
+        <p class="quote-attribution">
+          --Claire Hubley, Author of RX: Earth
+        </p>
+      </div>
+      <i class="fa fa-quote fa-quote-right mdc-theme--primary fa-3x" aria-hidden="true"
+        style="align-self: flex-end;"></i>
+    </div>
+  </div>
+
+</div>

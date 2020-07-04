@@ -1,0 +1,157 @@
+<div id="book-container" class="fill-screen">
+    <div id="page-controls-container">
+        <div>
+            Page Controls:
+        </div>
+        <div id="custom-menu">
+
+        </div>
+        
+    </div>
+    {{!-- <div class="image-caption">
+                    <i class="fa fa-chevron-down"></i>
+                    <div>&nbsp;Look Inside to Learn More</div>
+                </div> --}}
+    {{#each (buildPages items word)}}
+    <div id="urban-glossary{{@index}}" class="urban-glossary glossary-hidden">
+        <div>
+            <h3>The Urban Glossary</h3>
+            <br>
+            <h3 style="margin:0">From</h3>
+            <br>
+            <h3>LAUX the Author</h3>
+        </div>
+        {{{pages}}}
+        <div></div>
+    </div>
+    {{/each}}
+    <div id="look-inside">
+        <i class="fa fa-reply fa-2x"></i>
+        <div>Look Inside</div>
+    </div>
+</div>
+
+{{!-- <script>
+    $(document).ready(function() {
+        var tabBarHeight = $(".mdc-tab-bar").height();
+        var height = $(window).height() - tabBarHeight - 100;
+        var width = $(window).width();
+
+
+        $("#urban-glossary").turn({
+            width: width,
+            height: height,
+            autoCenter: true
+        });
+    });
+
+
+</script> --}}
+
+<script>
+
+    $(function () {
+        var tabBarHeight = $(".mdc-tab-bar").height();
+        var windowHeight = $(window).height();
+        var height = windowHeight - tabBarHeight - 100;
+        var width = $(window).width();
+        var lookInside = $("#look-inside");
+        var coverWidth;
+        var options = {
+            menu: '#custom-menu',
+            pageSelector: true,
+            width: width,
+            height: height,
+            closed: true, covers: true,
+            autoCenter: true,
+            hoverWidth: 100
+        };
+        var initBook = width >= 400 & windowHeight >= 900 ? 3
+        : width >= 400 & windowHeight >= 650 ? 2
+        : width >= 400 & windowHeight >= 400 ? 1
+        : 0;
+        var maxItemsPerPage = initBook + 1;
+        var ix = "{{ getPageIndex items word }}".split(',')[initBook];
+
+        if('{{word}}') $("#look-inside").hide();
+
+        $('#urban-glossary' + initBook).booklet(options);
+        $('#urban-glossary' + initBook).removeClass('glossary-hidden');
+
+        $(".b-page:not(.b-page-0)").addClass("shadow-z1");
+        //console.log(ixs);
+        $('#urban-glossary' + initBook).booklet("gotopage", ix);
+
+        coverWidth = $(".b-wrap.b-page-cover").width();
+
+        lookInside.css('top', height + 50);
+        lookInside.css('right', coverWidth / 2 + 25);
+        //console.log(coverWidth);
+
+        //console.log(initBook);
+//console.log(windowHeight);
+    
+    });
+
+    $(window).on('resize',function() {
+        var tabBarHeight = $(".mdc-tab-bar").height();
+        var windowHeight = $(window).height();
+        var height = windowHeight - tabBarHeight - 100;
+        var width = $(window).width();
+        var lookInside = $("#look-inside");
+        var options = {
+            menu: '#custom-menu',
+            pageSelector: true,
+            width: width,
+            height: height,
+            closed: true, covers: true,
+            autoCenter: true,
+            hoverWidth: 100
+        };
+        var activeID = $(".booklet").attr('id');
+        var activeIx = activeID.substr(-1);
+        var ixs = "{{ getPageIndex items word }}".split(',');
+        var coverWidth;
+
+        //console.log(word);
+
+        $(".urban-glossary:not(.glossary-hidden)").booklet("option", "width", width);
+        //console.log($("#urban-glossary").booklet("option", "width"));
+        $(".urban-glossary:not(.glossary-hidden)").booklet("option", "height", height);
+
+        coverWidth = $(".b-wrap.b-page-cover").width();
+
+        lookInside.css('top', height + 50);
+        lookInside.css('right', coverWidth / 2 + 25);
+//console.log(ixs);
+//console.log(activeIx);
+//console.log(windowHeight);
+
+        if (width >= 400 && windowHeight >= 900 && activeIx != 3) {            
+            $(".urban-glossary").addClass("glossary-hidden");
+            $(".booklet").booklet("destroy");
+            $("#urban-glossary3").removeClass("glossary-hidden");
+            $('#urban-glossary3').booklet(options);
+            $('#urban-glossary3').booklet("gotopage", ixs[3]);
+        } else if (width >= 400 && windowHeight >= 650 && windowHeight < 900 && activeIx != 2) {
+            $(".urban-glossary").addClass("glossary-hidden");
+            $(".booklet").booklet("destroy");
+            $("#urban-glossary2").removeClass("glossary-hidden");
+            $('#urban-glossary2').booklet(options);
+            $('#urban-glossary2').booklet("gotopage", ixs[2]);
+        } else if (width >= 400 && windowHeight >= 400 && windowHeight < 650 && activeIx != 1) {
+            $(".urban-glossary").addClass("glossary-hidden");
+            $(".booklet").booklet("destroy");
+            $("#urban-glossary1").removeClass("glossary-hidden");
+            $('#urban-glossary1').booklet(options);
+            $('#urban-glossary1').booklet("gotopage", ixs[1]);
+        } else if ((windowHeight < 400 || width < 400) && activeIx != 0) {
+            $(".urban-glossary").addClass("glossary-hidden");
+            $(".booklet").booklet("destroy");
+            $("#urban-glossary0").removeClass("glossary-hidden");
+            $('#urban-glossary0').booklet(options);
+            $('#urban-glossary0').booklet("gotopage", ixs[0]);
+        }
+    });
+
+</script>

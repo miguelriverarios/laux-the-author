@@ -1,0 +1,75 @@
+<section class="hero-container">
+        <span id="book-hero" class="hero">
+        </span>
+        <div class="hero-content">
+            <p class="small-text">To All the Places<br>I've Had Sex Before</p>
+            <p class="main-text">The book that started it all</p>
+        </div>
+    </section>
+
+<div class="main-content-container">
+    {{!-- <div style="text-align:center">
+        <h1>To All the Places I've Had Sex</h1>
+    </div> --}}
+
+    <div class="book-summary">
+        <img class="mdc-elevation-z1" style="margin-right: 1em;" id="book1" src="../../images/temp-book-cover.png"
+            alt="To All the Places I've Had Sex Cover" height="300px">
+
+        <div>
+            <p>
+                What happens when you spend years keeping your secrets to yourself, unprocessed and unforgotten? When
+                you
+                have
+                obtained an identity, but you’re not sure how or why?
+            </p>
+            <p>
+                To All The Places I’ve Had Sex Before is an expirement in truth-telling. Writing it was an opportunity
+                to
+                acknowledge the past, to contextualize it with my history and culture, and to learn from it.
+            </p>
+            <p>
+                This book explores the ever so visible, yet ever so stigmatized subject of sex. To All The Places I’ve
+                Had
+                Sex
+                Before is an intimate journey that begs the question, what does it mean to truly be sexually liberated
+                and
+                what
+                measures does it take to get there, exploring the notions of private and public, the importance of
+                reflection,
+                and the difficulty of taking action.
+            </p>
+            <p>
+                To All The Places I’ve Had Sex Before is a set of personal narrative essays that explore the true
+                meaning of
+                sexual liberation for LAUX the author.
+            </p>
+        </div>
+    </div>
+
+    <form action="/purchase-your-copy" style="text-align:center">
+    <div>Note: The book will be avilable for order soon!</div>
+        <button disabled id="btn" type="submit" class="mdc-button-purchase mdc-button mdc-button--outlined" data-mdc-auto-init="MDCRipple">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Purchase Your Copy</span>
+        </button>
+    </form>
+
+    {{#each praise}}
+    <div class="image-description book-description">
+        <i class="fa fa-quote fa-quote-left mdc-theme--primary fa-3x" aria-hidden="true" 
+        style="align-self: flex-start;"></i>
+            <div>
+                <p>
+                   {{quote}} 
+                </p>
+                <p class="quote-attribution">
+                    --{{person}}, {{organization}}
+                </p>
+            </div>
+            <i class="fa fa-quote fa-quote-right mdc-theme--primary fa-3x" aria-hidden="true"
+        style="align-self: flex-end;"></i>
+    </div>
+    {{/each}}
+
+</div>

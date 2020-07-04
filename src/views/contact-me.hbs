@@ -1,0 +1,188 @@
+<section class="hero-container">
+    <span id="contact-hero" class="hero">
+    </span>
+    <div class="hero-content">
+        <p class="small-text">Contact Me</p>
+        <p class="main-text">Share your stories or<br>ask me about mine</p>
+    </div>
+</section>
+
+<div>
+    <form action="/" method="POST" id="contact-form">
+        <div class="mdc-layout-grid">
+
+            <div class="mdc-layout-grid__inner">
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet">
+
+                </div>
+            </div>
+
+            <div id="name" class="mdc-layout-grid__inner">
+
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+                        <span class="mdc-text-field__ripple"></span>
+                        <input id="firstName" name="firstName" class="form-input mdc-text-field__input form-input"
+                            type="text" aria-labelledby="my-label-id">
+                        <span class="mdc-floating-label" id="my-label-id">First Name *</span>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+                        <span class="mdc-text-field__ripple"></span>
+                        <input id="lastName" name="lastName" class="form-input mdc-text-field__input form-input"
+                            type="text" aria-labelledby="my-label-id">
+                        <span class="mdc-floating-label" id="my-label-id">Last Name *</span>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+
+            </div>
+
+            <div id="details" class="mdc-layout-grid__inner">
+
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+                        <span class="mdc-text-field__ripple"></span>
+                        <input id="email" name="email" class="form-input mdc-text-field__input form-input" type="text"
+                            aria-labelledby="my-label-id">
+                        <span class="mdc-floating-label" id="my-label-id">Email *</span>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <label class="mdc-text-field mdc-text-field--filled" data-mdc-auto-init="MDCTextField">
+                        <span class="mdc-text-field__ripple"></span>
+                        <input id="personal-pronouns" name="personal-pronouns"
+                            class="form-input mdc-text-field__input form-input" type="text"
+                            aria-labelledby="my-label-id">
+                        <span class="mdc-floating-label" id="my-label-id">Personal Pronouns</span>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="mdc-layout-grid__inner">
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet">
+
+                    <div id="type-container" class="mdc-select" data-mdc-auto-init="MDCSelect">
+                        <div class="mdc-select__anchor demo-width-class">
+                            <span class="mdc-select__ripple"></span>
+                            <input id="type" name="type" type="text" readonly
+                                class="form-input mdc-select__selected-text form-input">
+                            <i class="mdc-select__dropdown-icon"></i>
+                            <span class="mdc-floating-label">Type of Communication *</span>
+                            <span class="mdc-line-ripple"></span>
+                        </div>
+
+                        <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
+                            <ul class="mdc-list">
+                                <li class="mdc-list-item {{isSelected requestType ''}}" data-value=""
+                                    aria-selected="true">
+                                </li>
+
+                                <li class="mdc-list-item {{isSelected requestType 'general'}}"
+                                    data-value="general-request">
+                                    <span class="mdc-list-item__text">
+                                        General Request
+                                    </span>
+                                </li>
+
+                                <li class="mdc-list-item {{isSelected requestType 'media'}}" data-value="media-request">
+                                    <span class="mdc-list-item__text">
+                                        Media Request
+                                    </span>
+                                </li>
+
+                                <li class="mdc-list-item {{isSelected requestType 'event'}}" data-value="event-request">
+                                    <span class="mdc-list-item__text">
+                                        Event Request
+                                    </span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mdc-layout-grid__inner">
+
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet">
+
+                    <h3>What's on your mind? *</h3>
+
+                    <label id="description-container"
+                        class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--no-label"
+                        data-mdc-auto-init="MDCTextField">
+                        <textarea id="description" name="description"
+                            class="form-input mdc-theme--surface mdc-text-field__input form-input" rows="5" cols="40"
+                            aria-label="Label"></textarea>
+                        <span class="mdc-notched-outline">
+                            <span class="mdc-notched-outline__leading"></span>
+                            <span class="mdc-notched-outline__trailing"></span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mdc-layout-grid__inner">
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet">
+                    <div class="mdc-form-field">
+
+                        <label for="updates">Do you want to subscribe for future updates?</label>
+                        <br>
+                        <br>
+                        <div class="mdc-switch" data-mdc-auto-init="MDCSwitch">
+                            <div class="mdc-switch__track"></div>
+                            <div class="mdc-switch__thumb-underlay">
+                                <div class="mdc-switch__thumb"></div>
+                                <input name="updates" type="checkbox" id="updates"
+                                    class="form-input mdc-switch__native-control" role="switch" aria-checked="false">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mdc-layout-grid__inner mdc-layout-grid__inner-contact">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2" id="submit">
+
+                    <div class="mdc-snackbar" data-mdc-auto-init="MDCSnackbar">
+                        <div class="mdc-snackbar__surface">
+                            <div class="mdc-snackbar__label" role="status" aria-live="polite">
+                                Thank you for reaching out. I'll review your request at my earliest convenience.
+                                Unfortunately, due to volume, I may not be able to respond to all requests.
+                            </div>
+                            <div class="mdc-snackbar__actions">
+                                <button title="Dismiss" class="mdc-icon-button mdc-snackbar__dismiss material-icons">
+                                    close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button disabled id="contact-btn" type="submit"
+                        class="mdc-button-submit mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Submit</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
