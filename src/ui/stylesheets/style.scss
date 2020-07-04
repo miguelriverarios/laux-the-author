@@ -858,6 +858,16 @@ footer {
     );
 }
 
+.team-card .team-card-text {
+    @include responsive(
+        "display",
+        none,
+        (
+            600px: flex,
+        )
+    );
+}
+
 .team-card-image {
     @include responsive(
         "width",
@@ -882,9 +892,10 @@ footer {
 .mdc-card.team-card {
     @include responsive(
         "width",
-        50vw,
+        150px,
         (
-            1100px: 70vw,
+            600px: 50vw,
+            1100px: 70vw
         )
     );
 }
