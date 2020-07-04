@@ -1243,6 +1243,22 @@ label {
     );
 }
 
+#zoom-control {
+    @include responsive(
+        "display",
+        none,
+        (
+            //   "xs" : 12px,
+                //  450px : 13px,
+                // 1100px : 14px,
+                //    "l" : 15px,
+                // 1600px : 16px,
+                // "ipad" : 14px
+                600px: inherit
+        )
+    );
+}
+
 #map-container {
     @include flex($justify: flex-start);
 }
