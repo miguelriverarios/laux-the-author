@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 require('dotenv').config();
 
+var fs = require('fs');
+var ssl = {
+  key: fs.readFileSync("../../ssl/server.key",'utf8'),
+  cert: fs.readFileSync("../../ssl/cert.crt",'utf8'),
+  ca: fs.readFileSync('../../ssl/gd-bundle.crt','utf8')
+};
+
 /**
  * Module dependencies.
  */
@@ -23,7 +30,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = http.createServer(ssl, app);
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -3,3 +3,5 @@ dist/
 src/middleware/privatekey.json
 .env
 yarn.lock
+lauxtheauthor.com.zip
+ssl
