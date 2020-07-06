@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 require('dotenv').config();
-
+var path = require('path');
 var fs = require('fs');
 var ssl = {
-  key: fs.readFileSync("../../ssl/server.key",'utf8'),
-  cert: fs.readFileSync("../../ssl/cert.crt",'utf8'),
-  ca: fs.readFileSync('../../ssl/gd-bundle.crt','utf8')
+  cert: fs.readFileSync(path.join(__dirname, '../../ssl', 'cert.crt'),'utf8'),
+  key: fs.readFileSync(path.join(__dirname, '../../ssl', 'server.key'),'utf8'),
+  ca: fs.readFileSync(path.join(__dirname, '../../ssl', 'gd-bundle.crt'),'utf8')
 };
 
 /**
