@@ -14,7 +14,7 @@ var ssl = {
 
 var app = require('../server/app');
 var debug = require('debug')('laux-the-author:server');
-var http = require('https');
+var https = require('https');
 
 /**
  * Get port from environment and store in Express.
