@@ -1332,14 +1332,14 @@ label {
 .all-media-container {
     @include responsive(
         "margin",
-        1em 15em,
+        1em 2em,
         (
-            //   "xs" : 12px,
-                // 1100px: 2em 5em,
-                // 1250px: 2em 10em,
-                //    "l" : 25%,
-                1600px: 1em 20em,
-            1800px: 1em 30em // "ipad" : 25%
+            "xs": 1em 3em,
+            1100px: 1em 4em,
+            1250px: 1em 12em,
+            "l": 1em 16em,
+            1600px: 1em 20em,
+            1800px: 1em 30em // "ipad" : 25%,
         )
     );
 }
