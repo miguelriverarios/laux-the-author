@@ -2,6 +2,15 @@
 
     {{> progressBar }}
 
+    <div id="announcement-banner" class="">
+        <a onclick="dismiss();" class="announcement-close material-icons mdc-fab__icon">close</a>
+        My book launch celebration is coming up on July 31st. If you've bought my book already, there is a code in your
+        inbox for a free ticket.
+        All proceeds go to local artists. <a class="icon default-link"
+            href="https://www.eventbrite.com/e/lets-talk-about-sex-tickets-111900200512">Still need a ticket, click
+            here</a>.
+    </div>
+
     <div class="tab-container">
         {{> logo }}
 
@@ -9,11 +18,9 @@
             <div class="mdc-tab-scroller__scroll-area">
                 <div class="mdc-tab-scroller__scroll-content">
 
-                    <a id="my-story-tab" href="/my-story"
-                    class="{{isActiveTabClass type 'my-story'}}"
-                        role="tab" aria-selected="{{isActiveBoolean type 'my-story'}}"
-                        tabindex="{{isActiveIndex type 'my-story'}}" aria-controls="my-story"
-                        data-mdc-auto-init="MDCTab">
+                    <a id="my-story-tab" href="/my-story" class="{{isActiveTabClass type 'my-story'}}" role="tab"
+                        aria-selected="{{isActiveBoolean type 'my-story'}}" tabindex="{{isActiveIndex type 'my-story'}}"
+                        aria-controls="my-story" data-mdc-auto-init="MDCTab">
                         <span class="mdc-tab__content">
                             <span class="default-tab-color mdc-tab__text-label">My Story</span>
                         </span>
@@ -50,10 +57,9 @@
                         <span class="mdc-tab__ripple"></span>
                     </a>
                     <span class="pipe">|</span>
-                    <a id="events-tab" href="/events"
-                        class="{{isActiveTabClass type 'events'}} progress-bar-click" role="tab"
-                        aria-selected="{{isActiveBoolean type 'events'}}" tabindex="{{isActiveIndex type 'events'}}"
-                        aria-controls="events">
+                    <a id="events-tab" href="/events" class="{{isActiveTabClass type 'events'}} progress-bar-click"
+                        role="tab" aria-selected="{{isActiveBoolean type 'events'}}"
+                        tabindex="{{isActiveIndex type 'events'}}" aria-controls="events">
                         <span class="mdc-tab__content">
                             <span class="default-tab-color mdc-tab__text-label">Upcoming Events</span>
                         </span>
@@ -64,8 +70,8 @@
                     </a>
                     <span class="pipe">|</span>
                     <a id="urban-glossary-tab" href="/urban-glossary"
-                        class="{{isActiveTabClass type 'urban-glossary'}} progress-bar-click"
-                        role="tab" aria-selected="{{isActiveBoolean type 'urban-glossary'}}"
+                        class="{{isActiveTabClass type 'urban-glossary'}} progress-bar-click" role="tab"
+                        aria-selected="{{isActiveBoolean type 'urban-glossary'}}"
                         tabindex="{{isActiveIndex type 'urban-glossary'}}" aria-controls="urban-glossary">
                         <span class="mdc-tab__content">
                             <span class="default-tab-color mdc-tab__text-label">Urban Glossary</span>
@@ -86,3 +92,15 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    function dismiss() {
+        $("#announcement-banner").slideUp();
+        $(".announcement-close").slideUp();
+
+        Cookies.set("hide-announcement-banner", "true", { path: '/' });
+    }
+
+
+</script>

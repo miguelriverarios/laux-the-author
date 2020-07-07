@@ -279,6 +279,8 @@ $('.progress-bar-click').click(function(e) {
 
 $(document).ready(function () {
     toggleProgressBar(true);
+
+    if(Cookies.get("hide-announcement-banner") != "true") $("#announcement-banner:not(.permaHide)").slideDown();
 });
 
 

@@ -20,7 +20,9 @@
 
         {{#upcomingEvents events 4}}
         <div id="card{{@index}}" class="mdc-card events">
+            <a class="default-link" href="{{link}}" style="color:black">
             <div class="mdc-card__primary-action" tabindex="0">
+                
                 <div class="card-header">
                     <div class="card-icon material-icons">{{icon}}</div>
                     <div class="card-title">
@@ -33,6 +35,7 @@
                     <div class="mdc-card__media-content" style="background: url('{{image}}') no-repeat center;background-size:cover;"></div>
                 </div>
             </div>
+            </a>
             <hr class="mdc-list-divider">
             <div class="card-body mdc-typography--body2">
                 {{desc}}
@@ -75,6 +78,10 @@
                             <li onclick="window.location='{{mail}}';" class="mdc-list-item" tabindex="0" data-mdc-dialog-action="callisto">
                                 <a class="default-link share fa fa-envelope fa-2x"></a>
                                 <span class="share mdc-list-item__text">EMAIL</span>
+                            </li>
+                            <li onclick="copyToClipboard('{{link}}');" class="mdc-list-item" tabindex="0" data-mdc-dialog-action="callisto">
+                                <a class="default-link share fa fa-copy fa-2x"></a>
+                                <span class="share mdc-list-item__text">COPY TO CLIPBOARD</span>
                             </li>
                         </ul>
                     </div>
@@ -123,3 +130,15 @@
         {{/pastEvents}}
     </div>
 </div>
+
+<script>
+function copyToClipboard(text) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(text).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
+
+
+</script>

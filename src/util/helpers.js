@@ -96,7 +96,7 @@ var register = function (Handlebars) {
                     wordsOnPage.push(item.word);
 
                     page +=
-                        '<div class="mdc-card glossary-item' + (wordToHighlight == item.word ? " glossary-item-selected" : "") + '">' +
+                        '<div class="mdc-card glossary-item' + (wordToHighlight.toLowerCase() == item.word.toLowerCase() ? " glossary-item-selected" : "") + '">' +
                         '<div>' +
                         '<b class="glossary-word">' + item.word +
                         '</b> [' + stressPronounciation(item.pronounciation, item.stress) + ']' +

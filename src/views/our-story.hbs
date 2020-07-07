@@ -199,7 +199,7 @@
       });
     }
 
-    $("object").contents().find(".default").click(function (e) {
+    $("object").contents().find(".default:not(.clicked)").click(function (e) {
       var countryCode = $(this).attr('id');
       var classStr = $(this).attr('class');
       var isClicked = /clicked/.test(classStr);

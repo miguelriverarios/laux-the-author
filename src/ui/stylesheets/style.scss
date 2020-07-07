@@ -8,7 +8,7 @@ $alternate-background-color: #756660;
 $background-color-alpha: rgba(0, 0, 0, 0.1);
 $dark-background-color: #242b32;
 $surface-color: white;
-$on-surface-color: #f2e4b1;
+$on-surface-color: #5d495b;
 $error-color: red;
 $on-error-color: white;
 
@@ -216,6 +216,22 @@ $named-breakpoints: (
 // MAIN
 //
 //**************************
+
+.announcement-close {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#announcement-banner {
+    background-color: $secondary-color;
+    color: white;
+    padding: 1em 3em;
+    font-size: 1.25em;
+    display:none;
+}
 
 .mdc-snackbar {
     @include snackbar.fill-color($on-secondary-color);
@@ -716,7 +732,7 @@ footer {
 .my-story-short .first-part {
     font-family: CaviarDreamsBold;
     font-weight: bold;
-    color: $on-surface-color;
+    color: $primary-color;
 }
 
 .my-story-short {
@@ -847,6 +863,16 @@ footer {
     );
 }
 
+.team-card {
+    @include responsive(
+        "cursor",
+        pointer,
+        (
+            1100px: default,
+        )
+    );
+}
+
 .team-card .mdc-list-divider,
 .team-card .team-card-body {
     @include responsive(
@@ -945,6 +971,7 @@ footer {
 
 #btn,
 #contact-btn {
+    @include button.disabled-ink-color($background-color);
     @include button.container-fill-color($on-secondary-color);
     @include button.disabled-container-fill-color(rgba($secondary-color, 0.5));
 }
@@ -955,7 +982,7 @@ footer {
 }
 
 .mdc-select .mdc-list-item--selected {
-    @include list.item-primary-text-ink-color($on-secondary-color);
+    @include list.item-primary-text-ink-color($secondary-color);
     background-color: rgba($on-secondary-color, 0.2);
 }
 
@@ -1270,7 +1297,7 @@ label {
 //**************************
 
 .media-container {
-    @include flex;
+    @include flex($justify:flex-start);
     padding: 1em;
 }
 
@@ -1648,6 +1675,17 @@ ol {
             //    "l" : 25%,
                 1600px: 0em 12em,
             1800px: 0em 15em // "ipad" : 25%
+        )
+    );
+}
+
+#right-credits {
+    @include responsive(
+        "margin-left",
+        0em,
+        (
+            //   "xs" : 12px,
+                1100px: 3em
         )
     );
 }

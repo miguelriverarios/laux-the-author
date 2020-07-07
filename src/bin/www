@@ -15,11 +15,13 @@ var ssl = {
 var app = require('../server/app');
 var debug = require('debug')('laux-the-author:server');
 var https = require('https');
+var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
+// var port = normalizePort(process.env.PORT || '3000');
 var port = normalizePort(process.env.NODE_ENV == 'production' ? '3000' : process.env.PORT || '5000');
 // var port = normalizePort('3000');
 //  console.log(port);
@@ -30,11 +32,17 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = https.createServer(ssl, app);
+// var httpServer = http.createServer(app);
+// var server = https.createServer(ssl, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+// httpServer.listen(5000);
+// httpServer.on('error', onError);
+// httpServer.on('listening', onListening);
 
 server.listen(port);
 server.on('error', onError);
@@ -98,4 +106,6 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  // console.log(addr);
+  // console.log(ssl);
 }

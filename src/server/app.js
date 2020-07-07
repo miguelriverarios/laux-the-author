@@ -1,5 +1,5 @@
 var createError = require('http-errors');
-const auth = require('../middleware/auth');
+// const auth = require('../middleware/auth');
 var express = require('express');
 var exphbs = require("express-handlebars");
 var path = require('path');
@@ -25,7 +25,7 @@ const app = express();
 app.use(favicon(path.join(__dirname, '../../dist/', 'favicon.ico')));
 
 // Uncomment when launching dev site
-app.use(auth);
+// app.use(auth);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
