@@ -32,6 +32,7 @@ var express = require('express');
 var router = express.Router();
 const { google } = require('googleapis');
 var jwtClient = require('../middleware/google');
+var announcement = require('../middleware/announcement');
 
 router.get('/', function (req, res, next) {
     let sheetName = 'Events!A2:K'
@@ -67,8 +68,22 @@ router.get('/', function (req, res, next) {
                 if (date) prev.push(obj);
                 return prev;
             }, []);
-            // console.log(result);
-            res.render('events', { title: 'LAUX the Author', type: 'events', events: result });
+            
+            const getResults = async function () {
+                const results = await Promise.all([announcement()]);
+                const a = results[0].values.reduce(function (prev, curr) {
+            
+                    prev = curr[0] == "FALSE" ? false : curr[0];
+            
+                  return prev;
+                }, '');
+            
+                res.render('events', { title: 'LAUX the Author', type: 'events', events: result, announcement: a });
+              }
+            
+              getResults();
+
+            
         }
     });
 });

@@ -49,4 +49,7 @@ $("#urban-glossary" + initBook).bind("bookletchange", function (event, data) {
     $("#urban-glossary" + initBook).removeClass("page-turning");
 });
 
+$(".b-selector.b-selector-page ul li").click(function() {
+    $(".b-selector.b-selector-page ul").slideUp();
+})
 // $("#look-inside").css("right", $(window).width() / 4 + 15 + 'px');

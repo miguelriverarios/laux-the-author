@@ -7,21 +7,35 @@
     </div>
 </section>
 
+<p style="text-transform:uppercase;text-align:center;font-size:1.5rem;">Thank you for supporting me and joining me on this journey!</p>
+
 <div id="purchase-container">
     {{!-- <h3>Find the best place to purchase my book below</h3>
     <p>My book is available in a lot of places. Some organizations are better than others. Check out my thoughts below.
     </p> --}}
+    <a id="purchase-book-cover" class="default-link" href="/to-all-the-places-ive-had-sex-before">
+            <div class="icon image-and-caption" style="width:225px;">
+                <div class="image-caption">
+                    <i class="fa fa-chevron-down"></i>
+                    <div>&nbsp;Read More About It</div>
+                </div>
+                <img class="image" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg"
+                    alt="To All the Places I've Had Sex Before Book Cover" height="225px">
+            </div>
+        </a>
+
     <div class="mdc-data-table" data-mdc-auto-init="MDCDataTable">
         <table class="mdc-data-table__table" aria-label="Places to Purchase the Book">
             <thead>
                 <tr class="mdc-data-table__header-row">
                     <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Vendor</b></th>
+                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Type of Book</b></th>
                     <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader"
-                        scope="col"><b>Cost (excl. Tax & Shipping)</b></th>
-                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Supported
-                            Organizations</b></th>
-                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Description</b></th>
-                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Final Recommendation</b>
+                        scope="col"><b>Price</b></th>
+                    {{!-- <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Supported
+                            Organizations</b></th> --}}
+                    {{!-- <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Description</b></th> --}}
+                    {{!-- <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Final Recommendation</b> --}}
                     </th>
                 </tr>
             </thead>
@@ -29,14 +43,15 @@
                 {{#each purchase}}
                 <tr style="cursor: pointer;" class="mdc-data-table__row" onclick="window.open('{{link}}');">
                     <td class="base-font mdc-data-table__cell">{{vendor}}</td>
+                    <td class="base-font mdc-data-table__cell">{{typeOfBook}}</td>
                     <td class="base-font mdc-data-table__cell mdc-data-table__cell--numeric">{{cost}}</td>
-                    <td class="base-font mdc-data-table__cell">{{orgs}}</td>
+                    {{!-- <td class="base-font mdc-data-table__cell">{{orgs}}</td>
                     <td class="base-font mdc-data-table__cell">{{desc}}</td>
                     <td class="base-font center-text mdc-data-table__cell">
                         <i class="{{getColor rec}} material-icons mdc-list-item__graphic" aria-hidden="true">
                             {{rec}}
                         </i>
-                    </td>
+                    </td> --}}
                 </tr>
                 {{/each}}
             </tbody>

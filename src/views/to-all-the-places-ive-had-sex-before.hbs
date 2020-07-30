@@ -13,7 +13,7 @@
     </div> --}}
 
     <div class="book-summary">
-        <img class="mdc-elevation-z1" style="margin-right: 1em;" id="book1" src="../../images/temp-book-cover.png"
+        <img class="mdc-elevation-z1" style="margin-right: 1em;" id="book1" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg"
             alt="To All the Places I've Had Sex Cover" height="300px">
 
         <div>
@@ -48,8 +48,8 @@
     </div>
 
     <form action="/purchase-your-copy" style="text-align:center">
-    <div>Note: The book will be avilable for order soon!</div>
-        <button disabled id="btn" type="submit" class="mdc-button-purchase mdc-button mdc-button--outlined" data-mdc-auto-init="MDCRipple">
+    {{!-- <div>Note: The book will be avilable for order soon!</div> --}}
+        <button id="btn" type="submit" class="mdc-button-purchase mdc-button mdc-button--outlined" data-mdc-auto-init="MDCRipple">
             <div class="mdc-button__ripple"></div>
             <span class="mdc-button__label">Purchase Your Copy</span>
         </button>
@@ -64,7 +64,8 @@
                    {{quote}} 
                 </p>
                 <p class="quote-attribution">
-                    --{{person}}, {{organization}}
+                    {{person}}<br/>
+                    <i>{{organization}}</i>
                 </p>
             </div>
             <i class="fa fa-quote fa-quote-right mdc-theme--primary fa-3x" aria-hidden="true"

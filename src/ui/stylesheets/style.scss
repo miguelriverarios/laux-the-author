@@ -71,6 +71,7 @@ $named-breakpoints: (
 @use "@material/tab/mdc-tab";
 @use "@material/tab";
 @use "@material/button";
+@use "@material/fab";
 @use "@material/fab/mdc-fab";
 @use "@material/linear-progress/mdc-linear-progress";
 @use "@material/textfield";
@@ -202,13 +203,13 @@ $named-breakpoints: (
     $named-breakpoints: $old !global;
 }
 
-@mixin hero($url) {
+@mixin hero($url, $cover: cover) {
     min-height: 250px;
     background-image: url($url);
     height: 30vh;
     display: block;
     background-position: center;
-    background-size: cover;
+    background-size: $cover;
 }
 
 //**************************
@@ -216,6 +217,32 @@ $named-breakpoints: (
 // MAIN
 //
 //**************************
+
+.hide-scroll {
+    overflow: hidden;
+}
+
+#purchase-fab {
+    @include fab.accessible($on-secondary-color);
+    @include fab.ink-color($secondary-color);
+    //@include fab.extended-fluid;
+}
+
+// @media screen and (max-width: 1100px) {
+//     .mdc-fab--extended {
+//         @include fab.extended-padding(5px, 5px)
+//     }
+// }
+
+// #purchase-fab .mdc-fab__label {
+//     @include responsive(
+//         "display",
+//         none,
+//         (
+//             1100px: block
+//         )
+//     );
+// }
 
 .announcement-close {
     position: absolute;
@@ -553,12 +580,46 @@ footer {
 }
 
 :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item:before {
-    background-color: $on-secondary-color;
+    background-color: $primary-color;
 }
 
 .mdc-drawer .mdc-list-item__text,
 .mdc-drawer .mdc-list-item__graphic {
-    color: $background-color;
+    color: $background-color !important;
+}
+
+#subscribe2 {
+    @include button.ink-color($on-secondary-color);
+    @include button.height(48px);
+    width:100%;
+}
+
+#subscribe2:hover {
+    @include button.ink-color($primary-color);
+}
+
+
+#subscribe {
+    @include responsive(
+        "display",
+        none,
+        (
+            //   "xs" : 12px,
+                1100px: block
+        )
+    );
+}
+
+
+#subscribe2 {
+    @include responsive(
+        "display",
+        block,
+        (
+            //   "xs" : 12px,
+            1100px: none
+        )
+    );
 }
 
 //**************************
@@ -678,11 +739,25 @@ footer {
 
 .quote-attribution {
     text-align: right;
+    // color: $surface-color;
+    font-size: 1.15rem;
+    text-transform: uppercase;
 }
 
 .slick-list.draggable,
 .slick-track {
     height: 100%;
+}
+
+.username, .timestamp {
+    @include responsive(
+        "display",
+        none,
+        (
+            //   "xs" : 12px,
+                1000px: block
+        )
+    );
 }
 
 //**************************
@@ -841,7 +916,8 @@ footer {
 
 .mdc-drawer-team .mdc-drawer__title,
 .mdc-drawer-team .mdc-drawer__subtitle {
-    color: $on-secondary-color;
+    color: $secondary-color;
+    font-weight: bolder;
 }
 
 .mdc-drawer-team .mdc-drawer__content {
@@ -929,6 +1005,8 @@ footer {
         )
     );
 }
+
+
 
 //**************************
 //
@@ -1301,8 +1379,15 @@ label {
 //**************************
 
 .media-container {
-    @include flex($justify:flex-start);
+    @include flex;
     padding: 1em;
+    @include responsive(
+        "justify-content",
+        center,
+        (
+            1100px: flex-start
+        )
+    );
 }
 
 .image {
@@ -1476,6 +1561,7 @@ label {
 
 .mdc-chip {
     @include chips.ink-color($background-color);
+    @include chips.height(2.5rem);
 }
 
 .mdc-dialog .mdc-dialog__title {
@@ -1488,9 +1574,23 @@ label {
 //
 //**************************
 
+.wowbook-controls {
+    background-color: $secondary-color;
+    // width: 50%;
+    border: 1px solid $on-primary-color;
+    background-image: none;
+}
+
+.wowbook-toolbar-container.wowbook-top {
+    position: sticky;
+    padding-top: 10px;
+    width: 99.8%;
+}
+
 .mdc-card.glossary-item {
-    padding: 1em;
+    padding: 0.8em;
     border-radius: 0;
+    color: black;
 }
 
 .mdc-card.glossary-item-selected {
@@ -1499,7 +1599,7 @@ label {
 
 .glossary-word {
     color: $on-secondary-color;
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-transform: uppercase;
 }
 
@@ -1510,6 +1610,7 @@ label {
 .glossary-definition,
 .glossary-no-stress {
     color: $background-color;
+    // font-size: 1.1rem;
 }
 
 .b-selector .b-current,
@@ -1533,25 +1634,18 @@ label {
     @include flex;
 }
 
-#look-inside {
-    @include flex($direction: column);
-    position: absolute;
-    z-index: 1000;
-    //     bottom: 2em;
-}
+// .b-wrap.b-page-cover {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
 
-.b-wrap.b-page-cover {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.booklet .b-page-cover {
+.wowbook-hardpage .wowbook-page-content {
     background-color: $on-secondary-color;
     background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
 }
 
-.booklet .b-page-cover h3 {
+.wowbook-hardpage .wowbook-page-content h3 {
     font-family: "Beyno";
     text-align: center;
     font-size: 3rem;
@@ -1573,12 +1667,41 @@ ol {
     margin-top: 0;
     @include responsive(
         "padding",
-        1em,
+        0.6em,
         (
             800px: auto,
         )
     );
 }
+
+.glossary-definition,
+.glossary-no-stress {
+    @include responsive(
+        "font-size",
+        0.7rem,
+        (
+            450px: 0.8rem,
+            1100px: 1rem,
+        )
+    );
+}
+
+.wowbook-page.wowbook-hardpage > .wowbook-page-content {
+    @include flex;
+}
+
+// #look-inside {
+//     @include flex($direction: column);
+//     position: absolute;
+//     z-index: 1000;
+//     @include responsive(
+//         "display",
+//         none,
+//         (
+//             1100px: flex,
+//         )
+//     );
+// }
 
 //**************************
 //
@@ -1587,11 +1710,31 @@ ol {
 //**************************
 
 #purchase-container {
-    @include flex($direction: column, $justify: flex-start);
+    @include flex;
 }
 
 .mdc-data-table {
-    margin: 1em 6em 1em 6em;
+    margin: 1em 2em 1em 2em;
+}
+
+#purchase-book-cover {
+    @include responsive(
+        "display",
+        none,
+        (
+            800px: block
+        )
+    );
+}
+
+.mdc-data-table {
+    @include responsive(
+        "width",
+        90vw,
+        (
+            800px: 45vw
+        )
+    );
 }
 
 .mdc-data-table__table {

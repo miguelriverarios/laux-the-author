@@ -33,17 +33,24 @@ gulp.task('sass', function () {
 gulp.task('javascripts', function () {
   return gulp.src(['./src/ui/javascripts/javascript.js',
     './src/ui/javascripts/index.js',
-    './src/ui/javascripts/main.js',
     './src/ui/javascripts/urban-glossary.js',
     './src/ui/javascripts/contact-me.js',
     './src/ui/javascripts/our-story.js',
     './src/ui/javascripts/my-team.js',
-    './src/ui/javascripts/events.js'])
+    './src/ui/javascripts/events.js',
+    './src/ui/javascripts/main.js'])
     .pipe(concat('concat.js'))
     .pipe(gulp.dest('src/ui/javascripts/'))
     .pipe(webpackStream(config, webpack))
     .pipe(gulp.dest('dist/javascripts/'));
 });
+
+// gulp.task('svgPanZoom', function () {
+//   return gulp.src(['./dist/js/svg-pan-zoom/svg-pan-zoom.js'])
+//     .pipe(concat('svg-pan-zoom2.min.js'))
+//     .pipe(webpackStream(config, webpack))
+//     .pipe(gulp.dest('dist/js/svg-pan-zoom/'));
+// });
 
 gulp.task('browser-sync', ['nodemon'], function () {
   browserSync.init(null, {

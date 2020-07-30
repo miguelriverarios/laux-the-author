@@ -2,14 +2,12 @@
 
     {{> progressBar }}
 
+    {{#if announcement}}
     <div id="announcement-banner" class="">
         <a onclick="dismiss();" class="announcement-close material-icons mdc-fab__icon">close</a>
-        My book launch celebration is coming up on July 31st. If you've bought my book already, there is a code in your
-        inbox for a free ticket.
-        All proceeds go to local artists. <a class="icon default-link"
-            href="https://www.eventbrite.com/e/lets-talk-about-sex-tickets-111900200512">Still need a ticket, click
-            here</a>.
+        {{{announcement}}}
     </div>
+    {{/if}}
 
     <div class="tab-container">
         {{> logo }}
@@ -77,6 +75,19 @@
                             <span class="default-tab-color mdc-tab__text-label">Urban Glossary</span>
                         </span>
                         <span class="{{isActiveIndicatorClass type 'urban-glossary'}}">
+                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                    </a>
+                    <span class="pipe">|</span>
+                    <a id="purchase-your-copy-tab" href="/purchase-your-copy"
+                        class="{{isActiveTabClass type 'purchase-your-copy'}} progress-bar-click" role="tab"
+                        aria-selected="{{isActiveBoolean type 'purchase-your-copy'}}"
+                        tabindex="{{isActiveIndex type 'purchase-your-copy'}}" aria-controls="purchase-your-copy">
+                        <span class="mdc-tab__content">
+                            <span class="default-tab-color mdc-tab__text-label">Purchase Your Copy</span>
+                        </span>
+                        <span class="{{isActiveIndicatorClass type 'purchase-your-copy'}}">
                             <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
                         </span>
                         <span class="mdc-tab__ripple"></span>

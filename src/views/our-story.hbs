@@ -15,9 +15,11 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
           <p class="header">Share your story with us</p>
 
-          <p class="our-story-description">To All The Places I’ve Had Sex Before is a set of personal narrative essays that explore the true meaning of
-          sexual liberation for LAUX the author. But there are countless other stories that need to be told, share your journey towards sexual
-          liberation and acceptance.</p>
+          <p class="our-story-description">To All The Places I’ve Had Sex Before is a set of personal narrative essays
+            that explore the true meaning of
+            sexual liberation for LAUX the author. But there are countless other stories that need to be told, share
+            your journey towards sexual
+            liberation and acceptance.</p>
         </div>
       </div>
 
@@ -132,7 +134,8 @@
 
           </div>
 
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1" id="submit">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--span-4-phone"
+            id="submit">
 
             <div class="mdc-snackbar mdc-snackbar--story" data-mdc-auto-init="MDCSnackbar">
               <div class="mdc-snackbar__surface">
@@ -149,8 +152,8 @@
               </div>
             </div>
 
-            <button disabled id="btn" type="submit" class="mdc-button-submit mdc-button mdc-button--raised"
-              data-mdc-auto-init="MDCRipple">
+            <button disabled id="btn" style="width:100%" type="submit"
+              class="mdc-button-submit mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">
               <div class="mdc-button__ripple"></div>
               <span class="mdc-button__label">Submit</span>
             </button>
@@ -182,10 +185,10 @@
   function objectOnClick(initCountryCode, storiesSummaryObj) {
     var hammertime = $("object").contents().find("svg").hammer();
 
-   // $("object").contents().find("svg").hammer().on("panleft panright tap press", function(event) {
+    // $("object").contents().find("svg").hammer().on("panleft panright tap press", function(event) {
     //callback
-  //  console.log(event.type);
-//});
+    //  console.log(event.type);
+    //});
 
     $("object").contents().find('#' + initCountryCode).addClass('clicked');
 
@@ -194,7 +197,7 @@
         var currId = $(this).attr('id');
 
         if (storiesSummaryObj[currId]) {
-          $(this).toggleClass('default', true);
+          $(this).toggleClass('default country', true);
         }
       });
     }
@@ -268,7 +271,7 @@
     var endPoint = { x: 0, y: 0 };;
     var scale = 1;
 
-    function wheelHandler(e, sign) {
+    /*function wheelHandler(e, sign) {
       var step = e.type == 'pinch' ? 0.02 : 0.05;
       e.preventDefault();
 
@@ -294,9 +297,9 @@
       scale = svgSize.w / viewBox.w;
       //zoomValue.innerText = `${Math.round(scale*100)/100}`;
       svgImage.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
-    }
+    }*/
 
-    $("#zoom-in").click(function (e) {
+    /*$("#zoom-in").click(function (e) {
       var sign = 1;
       wheelHandler(e, sign);
     });
@@ -304,12 +307,12 @@
     $("#zoom-out").click(function (e) {
       var sign = -1;
       wheelHandler(e, sign);
-    });
+    });*/
 
     //Unable to use jQuery because cannot force active listening
-    $("object").contents().find("svg")[0].addEventListener('wheel', wheelHandler, { passive: false });
-    
-    var el = document.querySelector("object").contentDocument.getElementById("svg2");
+    //$("object").contents().find("svg")[0].addEventListener('wheel', wheelHandler, { passive: false });
+
+    /*var el = document.querySelector("object").contentDocument.getElementById("svg2");
     var ham = new Hammer(el, {domEvents: true});
     
     ham.get('pinch').set({enable:true});
@@ -382,8 +385,88 @@
 
     svgImage.onmouseleave = function (e) {
       isPanning = false;
-    }
+    }*/
     //resize();
+
+    var eventsHandler;
+
+    eventsHandler = {
+      haltEventListeners: ['touchstart', 'touchend', 'touchmove', 'touchleave', 'touchcancel']
+      , init: function (options) {
+        var instance = options.instance
+          , initialScale = 1
+          , pannedX = 0
+          , pannedY = 0
+
+        // Init Hammer
+        // Listen only for pointer and touch events
+        this.hammer = Hammer(options.svgElement, {
+          inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput
+        })
+
+        // Enable pinch
+        this.hammer.get('pinch').set({ enable: true })
+
+        // Handle double tap
+        this.hammer.on('doubletap', function (ev) {
+          instance.zoomIn()
+        })
+
+        // Handle pan
+        this.hammer.on('panstart panmove', function (ev) {
+          // On pan start reset panned variables
+          if (ev.type === 'panstart') {
+            pannedX = 0
+            pannedY = 0
+          }
+
+          // Pan only the difference
+          instance.panBy({ x: ev.deltaX - pannedX, y: ev.deltaY - pannedY })
+          pannedX = ev.deltaX
+          pannedY = ev.deltaY
+        })
+
+        // Handle pinch
+        this.hammer.on('pinchstart pinchmove', function (ev) {
+          // On pinch start remember initial zoom
+          if (ev.type === 'pinchstart') {
+            initialScale = instance.getZoom()
+            instance.zoomAtPoint(initialScale * ev.scale, { x: ev.center.x, y: ev.center.y })
+          }
+
+          instance.zoomAtPoint(initialScale * ev.scale, { x: ev.center.x, y: ev.center.y })
+        })
+
+        // Prevent moving the page on some devices when panning over SVG
+        options.svgElement.addEventListener('touchmove', function (e) { e.preventDefault(); });
+      }
+
+      , destroy: function () {
+        this.hammer.destroy()
+      }
+    }
+
+    // Expose to window namespace for testing purposes
+    window.panZoom = svgPanZoom(svgImage, {
+      zoomEnabled: true
+      , controlIconsEnabled: false
+      , fit: 1
+      , center: 1
+      , customEventsHandler: eventsHandler
+    });
+
+    $("#zoom-in").click(function (e) {
+      e.preventDefault();
+
+      window.panZoom.zoomIn();
+    });
+
+    $("#zoom-out").click(function (e) {
+      e.preventDefault();
+
+      window.panZoom.zoomOut();
+    });
+
   };
 
 </script>

@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 const { google } = require('googleapis');
 var jwtClient = require('../middleware/google');
+var announcement = require('../middleware/announcement');
 
 router.get(['/', '/index.html.var'], function (req, res, next) {
 
-  //Google Sheets API
   let sheetName = 'Social Media!A2:I'
   let sheets = google.sheets('v4');
 
@@ -39,7 +39,19 @@ router.get(['/', '/index.html.var'], function (req, res, next) {
         return prev;
       }, []);
 
-      res.render('index', { title: 'LAUX the Author', type: 'index', socialMediaPosts: result, disableFAB: true });
+      const getResults = async function () {
+        const results = await Promise.all([announcement()]);
+        const a = results[0].values.reduce(function (prev, curr) {
+    
+          prev = curr[0] == "FALSE" ? false : curr[0];
+    
+          return prev;
+        }, '');
+    
+        res.render('index', { title: 'LAUX the Author', type: 'index', socialMediaPosts: result, disableFAB: true, announcement: a });
+      }
+    
+      getResults();
     }
   });
 });

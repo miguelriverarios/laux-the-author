@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 const { google } = require('googleapis');
 var jwtClient = require('../middleware/google');
+var announcement = require('../middleware/announcement');
 
 router.get('/', function (req, res, next) {
-    let sheetName = 'Purchase Your Copy!A2:G'
+    let sheetName = 'Purchase Your Copy!A2:H'
     let sheets = google.sheets('v4');
 
     sheets.spreadsheets.values.get({
@@ -24,18 +25,32 @@ router.get('/', function (req, res, next) {
                 var supportedOrganizations = curr[4];
                 var order = curr[5];
                 var recommendation = curr[6];
+                var typeOfBook = curr[7];
                 var obj = {
                     vendor: vendor, link: linkToPage, cost: cost,
                     desc: description, orgs: supportedOrganizations,
-                    order: order, rec: recommendation
+                    order: order, rec: recommendation, typeOfBook: typeOfBook
                 };
 
                 if (vendor) prev.push(obj);
                 return prev;
             }, []);
 
-            res.render('purchase-your-copy', { title: 'LAUX the Author', 
-            type: 'purchase-your-copy', purchase: result, disableFAB: true });
+            const getResults = async function () {
+                const results = await Promise.all([announcement()]);
+                const a = results[0].values.reduce(function (prev, curr) {
+            
+                    prev = curr[0] == "FALSE" ? false : curr[0];
+            
+                  return prev;
+                }, '');
+            
+                res.render('purchase-your-copy', { title: 'LAUX the Author', 
+            type: 'purchase-your-copy', purchase: result, disableFAB: true, announcement: a });
+              }
+            
+              getResults();
+
         }
     });
 });

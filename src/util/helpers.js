@@ -12,6 +12,14 @@ var register = function (Handlebars) {
         debug: function (obj) {
             console.log(obj);
         },
+        ifCond: function(v1, v2, trueResult, falseResult) {
+            //console.log(v1 == v2 ? trueResult : falseResult);
+            if (v1 == v2) return trueResult;
+            else falseResult;
+        },
+        drawerIndex: function (routerStr, tabStr) {
+            return routerStr == tabStr ? '0' : '-1';
+        },
         stressPronounciation: function (pronounciation, stress) {
             var words = pronounciation.split(' / ');
             var stresses = stress.toString().split(',');

@@ -68,6 +68,7 @@ const { google } = require('googleapis');
 var jwtClient = require('../middleware/google');
 var url = require('url');
 var querystring = require('querystring');
+var announcement = require('../middleware/announcement');
 const randomKey = function (obj) {
   var keys = Object.keys(obj);
 
@@ -107,7 +108,13 @@ router.get('/', function (req, res, next) {
   };
 
   const getResults = async function () {
-    const results = await Promise.all([getCountries(), getStories(), getStoriesSummary()]);
+    const results = await Promise.all([getCountries(), getStories(), getStoriesSummary(),announcement()]);
+    const a = results[3].values.reduce(function (prev, curr) {
+
+      prev = curr[0] == "FALSE" ? false : curr[0];
+
+      return prev;
+    }, '');
     const storiesSummary = results[2].values.reduce(function (prev, curr) {
       var code = curr[0];
       var name = curr[1];
@@ -155,7 +162,8 @@ router.get('/', function (req, res, next) {
       stories: stories,
       countryCode: countryCode,
       storiesSummary: storiesSummary,
-      type: 'our-story'
+      type: 'our-story', 
+      announcement: a
     });
   }
 

@@ -12,6 +12,9 @@ desc.each(function (ix, el) {
 $("#social-media-marquee").slick({
     autoplay: true,
     autoplaySpeed: 3000,
+    // autoplaySpeed: 0,
+    // cssEase: 'linear',
+    // speed: 10000,
     // variableWidth: true,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -24,14 +27,14 @@ $("#social-media-marquee").slick({
           breakpoint: 1300,
           settings: {
             slidesToShow: 3,
-            slidesToScroll: 3
+            slidesToScroll: 1
           }
         },
         {
           breakpoint: 800,
           settings: {
             slidesToShow: 2,
-            slidesToScroll: 2
+            slidesToScroll: 1
           }
         },
         {

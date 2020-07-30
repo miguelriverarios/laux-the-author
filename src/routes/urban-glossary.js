@@ -4,6 +4,7 @@ var url = require('url');
 var querystring = require('querystring');
 const { google } = require('googleapis');
 var jwtClient = require('../middleware/google');
+var announcement = require('../middleware/announcement');
 
 router.get('/', function (req, res, next) {
     let rawUrl = req.url;
@@ -37,7 +38,20 @@ router.get('/', function (req, res, next) {
                 return prev;
             }, []);
 
-            res.render('urban-glossary', { title: 'LAUX the Author', type: 'urban-glossary', items: result, word: word });
+            const getResults = async function () {
+                const results = await Promise.all([announcement()]);
+                const a = results[0].values.reduce(function (prev, curr) {
+            
+                    prev = curr[0] == "FALSE" ? false : curr[0];
+            
+                  return prev;
+                }, '');
+            
+                res.render('urban-glossary', { title: 'LAUX the Author', type: 'urban-glossary', items: result, word: word, announcement: a });
+              }
+            
+              getResults();
+            
         }
     });
 });
