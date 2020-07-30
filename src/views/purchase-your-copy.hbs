@@ -41,7 +41,7 @@
             </thead>
             <tbody class="mdc-data-table__content">
                 {{#each purchase}}
-                <tr style="cursor: pointer;" class="mdc-data-table__row" onclick="window.open('{{link}}');">
+                <tr style="cursor: pointer;" class="mdc-data-table__row" onclick="window.location.href = '{{link}}';">
                     <td class="base-font mdc-data-table__cell">{{vendor}}</td>
                     <td class="base-font mdc-data-table__cell">{{typeOfBook}}</td>
                     <td class="base-font mdc-data-table__cell mdc-data-table__cell--numeric">{{cost}}</td>
