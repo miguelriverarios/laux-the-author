@@ -164,6 +164,10 @@ var register = function (Handlebars) {
                 : rec == 'error' ? 'no'
                     : 'yes';
         },
+        noUpcomingEvents: function(events) {
+            var today = new Date();
+            return !events || events.length === 0 || events.filter(e => new Date(e.dateOfEvent) >= today).length == 0;
+        },
         upcomingEvents: function (events, max, options) {
             if (!events || events.length === 0) {
                 return options.inverse(this);

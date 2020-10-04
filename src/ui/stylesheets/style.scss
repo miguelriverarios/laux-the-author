@@ -1715,6 +1715,25 @@ ol {
 
 .mdc-data-table {
     margin: 1em 2em 1em 2em;
+    border: 0;
+    background-color: rgba(93,73,91,.7);
+    @include elevation.elevation(3);
+}
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+    color: $primary-color;
+}
+
+.mdc-data-table__row:not(.mdc-data-table__row--selected):hover {
+    background-color: rgba(93,73,91,0.8);
+}
+
+.mdc-data-table-hover {
+    background: rgba(93,73,91,0.8);
+}
+
+.mdc-data-table__pagination, .mdc-data-table__row {
+    border-top-color: $secondary-color;
 }
 
 #purchase-book-cover {

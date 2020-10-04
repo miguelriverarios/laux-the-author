@@ -38,6 +38,7 @@ gulp.task('javascripts', function () {
     './src/ui/javascripts/our-story.js',
     './src/ui/javascripts/my-team.js',
     './src/ui/javascripts/events.js',
+    './src/ui/javascripts/purchase-your-copy.js',
     './src/ui/javascripts/main.js'])
     .pipe(concat('concat.js'))
     .pipe(gulp.dest('src/ui/javascripts/'))

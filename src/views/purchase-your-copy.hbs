@@ -7,22 +7,24 @@
     </div>
 </section>
 
-<p style="text-transform:uppercase;text-align:center;font-size:1.5rem;">Thank you for supporting me and joining me on this journey!</p>
+<p style="text-transform:uppercase;text-align:center;font-size:1.5rem;">Thank you for supporting me and joining me on
+    this journey!</p>
 
 <div id="purchase-container">
     {{!-- <h3>Find the best place to purchase my book below</h3>
     <p>My book is available in a lot of places. Some organizations are better than others. Check out my thoughts below.
     </p> --}}
-    <a id="purchase-book-cover" class="default-link" href="/to-all-the-places-ive-had-sex-before" style="margin-bottom:1.25em">
-            <div class="icon image-and-caption" style="width:225px;">
-                <div class="image-caption">
-                    <i class="fa fa-chevron-down"></i>
-                    <div>&nbsp;Read More About It</div>
-                </div>
-                <img class="image" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg"
-                    alt="To All the Places I've Had Sex Before Book Cover" height="225px">
+    <a id="purchase-book-cover" class="default-link" href="/to-all-the-places-ive-had-sex-before"
+        style="margin-bottom:1.25em">
+        <div class="icon image-and-caption" style="width:225px;">
+            <div class="image-caption">
+                <i class="fa fa-chevron-down"></i>
+                <div>&nbsp;Read More About It</div>
             </div>
-        </a>
+            <img class="image" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg"
+                alt="To All the Places I've Had Sex Before Book Cover" height="225px">
+        </div>
+    </a>
 
     <div class="mdc-data-table" data-mdc-auto-init="MDCDataTable">
         <table class="mdc-data-table__table" aria-label="Places to Purchase the Book">
@@ -40,6 +42,22 @@
                 </tr>
             </thead>
             <tbody class="mdc-data-table__content">
+                <tr id="paperback-checkout" style="cursor: pointer;" class="signed checkout mdc-data-table__row"
+                    onclick="window.location.href = '{{link}}';">
+                    <td style="color:white;font-weight:bold;" rowspan="2" class="signed base-font mdc-data-table__cell">
+                        Buy Directly From Me!</td>
+                    <td style="color:white;font-weight:bold;" class="signed base-font mdc-data-table__cell">Autographed
+                        Paperback</td>
+                    <td style="color:white;font-weight:bold;"
+                        class="signed base-font mdc-data-table__cell mdc-data-table__cell--numeric">$39.00</td>
+                </tr>
+                <tr id="signed-paperback-checkout" style="cursor: pointer;" class="checkout mdc-data-table__row"
+                    onclick="window.location.href = '{{link}}';">
+
+                    <td style="color:white;font-weight:bold;" class="not-signed base-font mdc-data-table__cell">Paperback</td>
+                    <td style="color:white;font-weight:bold;"
+                        class="not-signed base-font mdc-data-table__cell mdc-data-table__cell--numeric">$18.99</td>
+                </tr>
                 {{#each purchase}}
                 <tr style="cursor: pointer;" class="mdc-data-table__row" onclick="window.location.href = '{{link}}';">
                     <td class="base-font mdc-data-table__cell">{{vendor}}</td>
@@ -57,4 +75,73 @@
             </tbody>
         </table>
     </div>
+
+    {{!-- <button id="checkout-button" data-secret="{{ session_id }}">
+        Checkout
+    </button> --}}
+
+    {{> snackbar type="purchase-success" message="Thank you for your support! You will receive a receipt via email shortly with order details."}}
+
+    {{!-- {{> snackbar type="purchase-cancel" message="Thank you for subscribing! I look forward to going on this journey with you!"}} --}}
+
 </div>
+
+<script>
+    var checkoutButton = $('.checkout');
+    //var stripe = Stripe('pk_test_51H9yIQGLXd0wRqTHLIqIpOaOqg3ToUt74psUjN76T3Eb14YAXXAiEWJixRv6XNqMKkHWWY78EY6ZrjMh7LSa5Asf00vBtyQZGD');
+    var stripe = Stripe('pk_live_51H9yIQGLXd0wRqTHdbDzsByud4STz7KD1p1xDUdbtX0jFzhFCxtL9YY52VUUooRiILEvxjNbnMpO4wJK5ALBr7vc00s0oIrqdU');
+
+    checkoutButton.click(function () {
+        var isSigned = /signed/.test($(this).attr('class'));
+        var amount = isSigned ? 'price_1HFTk7GLXd0wRqTHX0nDz7rb' : 'price_1HFTgNGLXd0wRqTHj1VWbTfi';
+
+        stripe.redirectToCheckout({
+            // Make the id field from the Checkout Session creation API response
+            // available to this file, so you can provide it as argument here
+            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+            //sessionId: "{{ session_id }}"
+            lineItems: [{price: amount, quantity: 1}],
+            mode: 'payment',
+          successUrl: 'https://lauxtheauthor.com/purchase-your-copy?session_id={CHECKOUT_SESSION_ID}&status=success',
+          cancelUrl: 'https://lauxtheauthor.com/purchase-your-copy?cancel-purchase=true'
+
+        }).then(function (result) {
+            console.log(result);
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `result.error.message`.
+        });
+
+    });
+
+    $("td").hover(function () {
+
+        $el = $(this);
+
+        $el.parent().addClass("mdc-data-table-hover");
+
+        //console.log($el.attr('class'));
+        if ($el.parent().has('td[rowspan]').length == 0 && /not-signed/.test($el.attr('class'))) {
+
+            $el
+                .parent()
+                .prevAll('tr:has(td[rowspan]):first')
+                .find('td[rowspan]')
+                .addClass("mdc-data-table-hover");
+
+        }
+
+    }, function () {
+
+        /*$el
+            .parent()
+            .removeClass("mdc-data-table-hover")
+            .prevAll('tr:has(td[rowspan]):first')
+            .find('td[rowspan]')
+            .removeClass("mdc-data-table-hover");
+            */
+
+        $(".mdc-data-table-hover").removeClass("mdc-data-table-hover");
+
+    });
+</script>

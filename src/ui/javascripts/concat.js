@@ -360,6 +360,17 @@ if (eventCards.length) {
         mdcEventDialog.close();
     })
 }
+const snackbarPurchase = $('.mdc-snackbar--purchase-success');
+// console.log(snackbarPurchase);
+if (snackbarPurchase.length) {
+const params = new URLSearchParams(window.location.search);
+const status = params.get('status');
+// console.log(status);
+if (status) {
+    const mdcSnackbarPurchase = snackbarPurchase[0].MDCSnackbar;
+    mdcSnackbarPurchase.open();
+}
+}
 var url = 'https://script.google.com/macros/s/AKfycbygYiSXlhf4EtyPgYTKoW1atdOL0hZueTAP1jgPaQlYmRYFoNaU/exec';
 
 $(window).scroll(function () {
