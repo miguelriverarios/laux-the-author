@@ -6,7 +6,7 @@ var announcement = require('../middleware/announcement');
 // Set your secret key. Remember to switch to your live secret key in production!
 // See your keys here: https://dashboard.stripe.com/account/apikeys
 //const stripe = require('stripe')('sk_test_51H9yIQGLXd0wRqTHm9Z7Nie4WWf8Uy6BsGPzQUZ5LbncC0sOa6Z1T4jRSy2qujIsdXdNBfzmrVnvvQbHQgZFyQ7j00YnAnyvnE');
- const stripe = require('stripe')('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');
+ const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 // const session = await stripe.checkout.sessions.create({
 //   payment_method_types: ['card'],
