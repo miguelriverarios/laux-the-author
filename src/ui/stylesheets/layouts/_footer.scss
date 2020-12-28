@@ -1,0 +1,50 @@
+@use "../utilities" as util;
+@use "../vendors" as vend;
+
+body > footer {
+    @include util.mix-flex($direction: column);
+    @include vend.theme-property(background-color, util.$var-dark-background-color);
+    color: util.$var-primary-color;
+}
+
+#footer-links,
+#policy-links {
+    width: 100%;
+}
+
+#policy-links {
+    @include util.mix-flex();
+}
+
+#footer-links {
+    @include util.mix-flex($justify: space-evenly);
+}
+
+.policy {
+    font-size: 0.6em;
+}
+
+#subscription-form {
+    display: flex;
+    align-items: center;
+}
+
+#subscription-form {
+    @include util.mix-responsive(
+        "flex-direction",
+        column,
+        (
+            "ml": row,
+        )
+    );
+}
+
+#subscription-form label {
+    @include util.mix-responsive(
+        "margin",
+        0.5em 0,
+        (
+            "ml": 0,
+        )
+    );
+}

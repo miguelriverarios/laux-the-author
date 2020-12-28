@@ -1,99 +1,112 @@
-<section class="hero-container">
-    <span id="events-hero" class="hero">
-    </span>
-    <div class="hero-content">
-        <p class="small-text">Upcoming Events</p>
-        <p class="main-text">Check out my upcoming<br>appearances and events below</p>
-    </div>
+<section class="hero">
+    <img src="../../images/people-standing-behind-glistening-strips-of-gold-curtain-3394222.jpg"
+        alt="{{type}} hero banner" />
+    <article>
+        <h1>Upcoming Events</h1>
+        <h2>Check out my upcoming appearances and events below</h2>
+    </article>
 </section>
 
-<div id="events-container">
-    <a class="icon default-icon default-link" href="/contact-me?requestType=event">
-        <h3 style="text-align:center;text-transform:uppercase;font-size:2em;font-family:CaviarDreamsBold;">Want me to
-            come to your location?</h3>
-    </a>
+<div class="mdc-layout-grid--main">
+    <div class="mdc-layout-grid__inner--main">
 
-    <p class="header">Upcoming Events</p>
-    {{!-- <p>{{stringify events}}</p> --}}
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone mdc-layout-grid--align-center">
 
-
-    <div id="upcoming-events">
-
-        {{#if (noUpcomingEvents events)}}
-
-        <div style="font-size:1.2rem;">We're working out details for some exciting new events. Check back often for details.</div>
-
-        {{else}}
-
-        {{#upcomingEvents events 4}}
-        <div id="card{{@index}}" class="mdc-card events">
-            <a class="default-link" href="{{link}}" style="color:black">
-                <div class="mdc-card__primary-action" tabindex="0">
-
-                    <div class="card-header">
-                        <div class="card-icon material-icons">{{icon}}</div>
-                        <div class="card-title">
-                            <h2 class="mdc-typography--headline6">{{title}}</h2>
-                            <h3 class="mdc-typography--subtitle2">{{location}}<br>{{dateOfEvent}} - {{time}}
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="mdc-card__media mdc-card__media--square">
-                        <div class="mdc-card__media-content"
-                            style="background: url('{{image}}') no-repeat center;background-size:cover;"></div>
-                    </div>
-                </div>
+            <a class="text-on-background default-link" href="/contact-me?requestType=event">
+                <h3>HAVE AN IDEA FOR AN EVENT? CLICK HERE!</h3>
             </a>
-            <hr class="mdc-list-divider">
-            <div class="card-body mdc-typography--body2">
-                {{desc}}
-            </div>
-            <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                    <a href="{{link}}" class="mdc-button mdc-button-rsvp mdc-card__action mdc-card__action--button"
-                        data-mdc-auto-init="MDCRipple">
-                        <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">RSVP</span>
-                    </a>
-                </div>
-                <div class="mdc-card__action-icons">
-                    <button id="share{{index}}"
-                        class="share-button material-icons mdc-icon-button mdc-card__action mdc-card__action--icon"
-                        title="Share">share</button>
-                </div>
-            </div>
         </div>
 
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone">
+            <h3 class="separator">Upcoming Events</h3>
+        </div>
 
-        <div id="dialog{{index}}" class="mdc-dialog" data-mdc-auto-init="MDCDialog">
+        {{#if (noUpcomingEvents payload)}}
+
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone mdc-layout-grid--align-center">
+            <article class="text-on-background">We're working out details for some exciting new events. Check back often for
+                details or subscribe below to be get notifications direct to your inbox.</article>
+        </div>
+        {{else}}
+
+        {{#upcomingEvents payload 4}}
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone mdc-layout-grid--align-center">
+            <section class="mdc-card vertical-card shareable">
+                <a href="{{link}}" class="no-link-decoration text-on-surface">
+                    <div class="mdc-card__primary-action" tabindex="0">
+
+                        <header>
+                            <div class="card-icon material-icons">{{icon}}</div>
+                            <div class="card-title">
+                                <h3>{{title}}</h3>
+                                <h4>{{location}}
+                                    <br>
+                                    {{dateOfEvent}} - {{time}}
+                                </h4>
+                            </div>
+                        </header>
+                        <div class="mdc-card__media mdc-card__media--square">
+                            <img class="mdc-card__media-content" src="{{image}}">
+                        </div>
+                    </div>
+                </a>
+                <main>
+                    {{desc}}
+                </main>
+                <footer class="mdc-card__actions">
+                    <div class="mdc-card__action-buttons">
+                        <a href="{{link}}" class="mdc-button mdc-button-card mdc-card__action mdc-card__action--button"
+                            data-mdc-auto-init="MDCRipple">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">RSVP</span>
+                        </a>
+                    </div>
+                    <div class="mdc-card__action-icons">
+                        <button
+                            class="material-icons-share material-icons mdc-icon-button mdc-card__action mdc-card__action--icon"
+                            title="Share">share</button>
+                        <div class="hidden-social-links">
+                            <input class="facebook hidden" value="{{facebook}}" readonly>
+                            <input class="twitter hidden" value="{{twitter}}" readonly>
+                            <input class="mail hidden" value="{{mail}}" readonly>
+                            <input class="clipboard hidden" value="{{link}}" readonly>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+        {{/upcomingEvents}}
+
+        <!-- Dialog Box -->
+        <div id="share-events-dialog" class="mdc-dialog" data-mdc-auto-init="MDCDialog">
             <div class="mdc-dialog__container">
-                <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+                <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="share-this-event"
                     aria-describedby="my-dialog-content">
-                    <h2 class="mdc-dialog__title" id="my-dialog-title">Share</h2>
-                    <a class="dialog-close material-icons mdc-fab__icon">close</a>
+                    <h3 class="mdc-dialog__title">Share This Event</h3>
+                    <a class="close dialog-close material-icons mdc-fab__icon">close</a>
                     <div class="mdc-dialog__content" id="my-dialog-content">
                         <ul class="mdc-list mdc-list--avatar-list">
-                            {{!-- <a href="{{facebook}}"> --}}
-                            <li onclick="window.location='{{facebook}}';" class="mdc-list-item" tabindex="0"
+                            <li id="facebook" onclick="" class="mdc-list-item progress-bar-click" tabindex="0"
                                 data-mdc-dialog-action="none">
-                                <i class="default-link share fa fa-facebook fa-2x"></i>
-                                <span class="share mdc-list-item__text">FACEBOOK</span>
+                                <i class="fab fa-facebook-f"></i>
+                                <span class="mdc-list-item__text">FACEBOOK</span>
                             </li>
-                            {{!-- </a> --}}
-                            <li onclick="window.location='{{twitter}}';" class="mdc-list-item" tabindex="0"
+                            <li id="twitter" onclick="" class="mdc-list-item progress-bar-click"
                                 data-mdc-dialog-action="callisto">
-                                <a class="default-link share fa fa-twitter fa-2x"></a>
-                                <span class="share mdc-list-item__text">TWITTER</span>
+                                <a class="fab fa-twitter"></a>
+                                <span class="mdc-list-item__text">TWITTER</span>
                             </li>
-                            <li onclick="window.location='{{mail}}';" class="mdc-list-item" tabindex="0"
-                                data-mdc-dialog-action="callisto">
-                                <a class="default-link share fa fa-envelope fa-2x"></a>
-                                <span class="share mdc-list-item__text">EMAIL</span>
+                            <li id="mail" onclick="" class="mdc-list-item" data-mdc-dialog-action="callisto">
+                                <a class="fas fa-envelope"></a>
+                                <span class="mdc-list-item__text">EMAIL</span>
                             </li>
-                            <li onclick="copyToClipboard('{{link}}');" class="mdc-list-item" tabindex="0"
-                                data-mdc-dialog-action="callisto">
-                                <a class="default-link share fa fa-copy fa-2x"></a>
-                                <span class="share mdc-list-item__text">COPY TO CLIPBOARD</span>
+                            <li id="clipboard" onclick="" class="mdc-list-item" data-mdc-dialog-action="callisto">
+                                <a class="fas fa-copy"></a>
+                                <span class="mdc-list-item__text">COPY TO CLIPBOARD</span>
                             </li>
                         </ul>
                     </div>
@@ -103,55 +116,32 @@
             <div class="mdc-dialog__scrim"></div>
         </div>
 
-        {{/upcomingEvents}}
-
         {{/if}}
 
-    </div>
 
-    {{!-- <p class="header">All Future Events</p>
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone">
+            <h3 class="separator">Past Events</h3>
+        </div>
 
-    <div id="all-future-events" class="mdc-chip-set" role="grid" data-mdc-auto-init="MDCChipSet">
-        {{#futureEvents events}}
-        <a href="{{link}}" class="default-link">
-            <div class="mdc-chip" role="row">
-                <div class="mdc-chip__ripple"></div>
-                <span role="gridcell">
-                    <span role="button" tabindex="0" class="mdc-chip__primary-action">
-                        <span class="mdc-chip__text"><b>{{dateOfEvent}}</b><br />{{title}}</span>
-                    </span>
-                </span>
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone mdc-layout-grid--align-center">
+            <div id="all-future-events" class="mdc-chip-set" role="grid" data-mdc-auto-init="MDCChipSet">
+                {{#pastEvents payload}}
+
+                <a href="{{linkToEvent}}" class="default-link progress-bar-click">
+                    <div class="mdc-chip" role="row">
+                        <div class="mdc-chip__ripple"></div>
+                        <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">{{icon}}</i>
+                        <span role="gridcell">
+                            <span role="button" tabindex="0" class="mdc-chip__primary-action">
+                                <span class="mdc-chip__text"><b>{{dateOfEvent}}</b><br />{{title}}</span>
+                            </span>
+                        </span>
+                    </div>
+                </a>
+                {{/pastEvents}}
             </div>
-        </a>
-        {{/futureEvents}}
-    </div> --}}
-
-    <p class="header">Past Events</p>
-
-    <div id="all-future-events" class="mdc-chip-set" role="grid" data-mdc-auto-init="MDCChipSet">
-        {{#pastEvents events}}
-        <a href="{{link}}" class="default-link">
-            <div class="mdc-chip" role="row">
-                <div class="mdc-chip__ripple"></div>
-                <span role="gridcell">
-                    <span role="button" tabindex="0" class="mdc-chip__primary-action">
-                        <span class="mdc-chip__text"><b>{{dateOfEvent}}</b><br />{{title}}</span>
-                    </span>
-                </span>
-            </div>
-        </a>
-        {{/pastEvents}}
+        </div>
     </div>
 </div>
-
-<script>
-    function copyToClipboard(text) {
-        var $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val(text).select();
-        document.execCommand("copy");
-        $temp.remove();
-    }
-
-
-</script>

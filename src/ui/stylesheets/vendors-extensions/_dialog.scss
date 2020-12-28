@@ -1,0 +1,22 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+@include vend.dialog-core-styles;
+
+.mdc-dialog {
+    .mdc-list {
+        color: util.$var-on-surface-color;
+
+        .mdc-list-item {
+            &:hover {
+                background-color: rgba(util.$var-on-surface-color, 0.08);
+            }
+        }
+    }
+    .fab,
+    .fas {
+        width: 26px;
+        font-size: 2em;
+        margin-right: 1em;
+    }
+}

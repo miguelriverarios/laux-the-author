@@ -1,0 +1,47 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+aside.team-drawer {
+    width: 100vw;
+    max-width: 100%;
+    padding: 2em 10em 2em 10em;
+    z-index: 100;
+    align-items: center;
+    text-align: center;
+
+    @include util.mix-responsive(
+        "padding",
+        2em 1em,
+        (
+            "xs": 2em,
+            "s": 2em 5em,
+            "m": 2em 10em,
+            "ml": 2em 12em,
+        )
+    );
+
+    img {
+        border-radius: util.$var-border-radius;
+        @include vend.elevation-elevation(1);
+
+        @include util.mix-responsive(
+            "height",
+            util.$var-min-image-size, util.$var-image-size-breakpoints
+        );
+    }
+
+    header {
+        color: util.$var-secondary-color;
+        font-weight: bolder;
+
+        h2 {
+            margin-bottom: 0;
+        }
+        h3 {
+            margin-top: 0;
+        }
+    }
+    footer {
+        font-style: italic;
+    }
+}

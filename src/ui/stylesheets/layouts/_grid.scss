@@ -1,0 +1,123 @@
+@use "sass:list";
+@use "sass:map";
+@use "../utilities" as util;
+@use "../vendors" as vend;
+
+.horizontal-card-grid {
+    .mdc-layout-grid__cell--main {
+        @include util.mix-responsive(
+            "margin",
+            auto,
+            (
+                "s": 0,
+            )
+        );
+    }
+}
+
+// Seems to be a bug with using MDC grid mixins, so building from ground up
+// Most of this is lifted from node_modules/@material/layout-grid/mdc-layout-grid.scss
+// Dropped in custom margins and gutters via 'with' statement
+// https://github.com/material-components/material-components-web/issues/1879
+.mdc-layout-grid {
+    @each $type in util.$var-grid-types {
+        &--#{$type} {
+            @each $size in map.keys(vend.$layout-grid-columns) {
+                @include vend.layout-grid-media-query_($size) {
+                    $margin: map.get(map.get(vend.$layout-grid-default-margin, $type), $size);
+
+                    @include vend.layout-grid-layout-grid($size, $margin, vend.$layout-grid-max-width);
+                }
+            }
+        }
+    }
+}
+
+.mdc-layout-grid__inner {
+    @each $type in util.$var-grid-types {
+        &--#{$type} {
+            @each $size in map.keys(vend.$layout-grid-columns) {
+                @include vend.layout-grid-media-query_($size) {
+                    $margin: map.get(map.get(vend.$layout-grid-default-margin, $type), $size);
+                    $gutter: map.get(map.get(vend.$layout-grid-default-gutter, $type), $size);
+
+                    @include vend.layout-grid-inner($size, $margin, $gutter);
+                }
+            }
+        }
+    }
+}
+
+.mdc-layout-grid__cell {
+    // select the upper breakpoint
+    $upper-breakpoint: list.nth(map.keys(vend.$layout-grid-columns), 1);
+
+    @each $type in util.$var-grid-types {
+        &--#{$type} {
+            @each $size in map.keys(vend.$layout-grid-columns) {
+                @include vend.layout-grid-media-query_($size) {
+                    $gutter: map.get(map.get(vend.$layout-grid-default-gutter, $type), $size);
+
+                    @include vend.layout-grid-cell($size, vend.$layout-grid-default-column-span, $gutter);
+
+                    @for $span from 1 through map.get(vend.$layout-grid-columns, $upper-breakpoint) {
+                        // Span classes.
+                        // stylelint-disable max-nesting-depth
+                        @at-root .mdc-layout-grid__cell--#{$type}--span-#{$span},
+                            .mdc-layout-grid__cell--#{$type}--span-#{$span}-#{$size} {
+                            @include vend.layout-grid-cell-span_($size, $span, $gutter);
+                        }
+                        // stylelint-enable max-nesting-depth
+                    }
+                }
+            }
+
+            // Order override classes.
+            @for $i from 1 through map.get(vend.$layout-grid-columns, $upper-breakpoint) {
+                &--order-#{$i} {
+                    @include vend.layout-grid-cell-order($i);
+                }
+            }
+
+            // Alignment classes.
+            &--align-top {
+                @include vend.layout-grid-cell-align(top);
+            }
+
+            &--align-middle {
+                @include vend.layout-grid-cell-align(middle);
+            }
+
+            &--align-bottom {
+                @include vend.layout-grid-cell-align(bottom);
+            }
+        }
+    }
+}
+
+// .mdc-layout-grid--fixed-column-width {
+//     @each $size in map.keys(vend.$layout-grid-columns) {
+//         @include vend.layout-grid-media-query_($size) {
+//             $margin: map.get(vend.$layout-grid-default-margin, $size);
+//             $gutter: map.get(vend.$layout-grid-default-gutter, $size);
+//             $column-width: map.get(vend.$layout-grid-column-width, $size);
+
+//             @include vend.layout-grid-fixed-column-width($size, $margin, $gutter, $column-width);
+//         }
+//     }
+// }
+
+.mdc-layout-grid--align-left {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.mdc-layout-grid--align-center {
+    margin: auto;
+}
+
+.mdc-layout-grid--align-right {
+    margin-right: 0;
+    margin-left: auto;
+}
+// postcss-bem-linter: end

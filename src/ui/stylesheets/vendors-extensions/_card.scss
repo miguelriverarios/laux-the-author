@@ -1,0 +1,223 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+@include vend.card-core-styles;
+
+.show-on-s {
+    @include util.mix-responsive(
+        "display",
+        block,
+        (
+            "s": none,
+        )
+    );
+}
+
+.grow-on-hover {
+    .card-container {
+        transition: transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    a {
+        color: util.$var-on-secondary-color;
+        transition: 0.3s;
+        @include util.mix-responsive(
+            "text-align",
+            center,
+            (
+                "ml": left,
+            )
+        );
+    }
+
+    &:hover {
+        .card-container {
+            transform: scale(1.05);
+        }
+        a {
+            color: util.$var-primary-color;
+        }
+    }
+}
+
+section.mdc-card {
+    img {
+        object-fit: cover;
+        transition: transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+        background-color: util.$var-surface-color;
+    }
+    .img {
+        transition: transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+        background-position: center;
+        background-size: cover;
+        min-width: 100%;
+        min-height: 100%;
+    }
+    header {
+        width: 100%;
+        h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        h4 {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .card-icon {
+            margin-right: 0.5em;
+        }
+    }
+}
+
+section.mdc-card.vertical-card {
+    @include util.mix-responsive("width", util.$var-min-image-size-vertical, util.$var-image-size-breakpoints-vertical);
+
+    header {
+        @include util.mix-flex($justify: flex-start);
+        padding: 1em;
+    }
+
+    img {
+        @include util.mix-responsive(
+            "height",
+            util.$var-min-image-size-vertical,
+            util.$var-image-size-breakpoints-vertical
+        );
+        @include util.mix-responsive(
+            "width",
+            util.$var-min-image-size-vertical,
+            util.$var-image-size-breakpoints-vertical
+        );
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    main {
+        margin: 1em;
+    }
+}
+
+section.mdc-card.horizontal-card {
+    @include util.mix-flex($align: flex-start);
+    margin-top: 0.5em;
+
+    &.fixed-width {
+        @include util.mix-responsive("height", util.$var-min-image-size, util.$var-image-size-breakpoints);
+        @include util.mix-responsive(
+            "margin",
+            auto,
+            (
+                "s": 0,
+            )
+        );
+        @include util.mix-responsive(
+            "pointer-events",
+            all,
+            (
+                "ml": none,
+            )
+        );
+        @include util.mix-responsive(
+            "cursor",
+            pointer,
+            (
+                "ml": default,
+            )
+        );
+        @include util.mix-responsive(
+            "width",
+            util.$var-min-image-size,
+            (
+                "s": 100%,
+            )
+        );
+        @include util.mix-responsive(
+            "justify-content",
+            "flex-start",
+            (
+                "ml": "center",
+            )
+        );
+        header {
+            @include util.mix-responsive(
+                "text-align",
+                center,
+                (
+                    "ml": left,
+                )
+            );
+            @include util.mix-responsive(
+                "display",
+                none,
+                (
+                    "s": block,
+                )
+            );
+            @include util.mix-responsive(
+                "display",
+                none,
+                (
+                    "s": block,
+                )
+            );
+        }
+
+        .main-and-footer {
+            @include util.mix-responsive(
+                "height",
+                0,
+                (
+                    "ml": 60%,
+                )
+            );
+            @include util.mix-responsive(
+                "display",
+                none,
+                (
+                    "ml": block,
+                )
+            );
+        }
+    }
+
+    img {
+        @include util.mix-responsive("height", util.$var-min-image-size, util.$var-image-size-breakpoints);
+        @include util.mix-responsive("width", util.$var-min-image-size, util.$var-image-size-breakpoints);
+
+        @include util.mix-responsive(
+            "border-radius",
+            0,
+            (
+                "s": 4px 0px 0px 4px,
+            )
+        );
+    }
+    hr {
+        margin: 0;
+        width: 95%;
+        border-bottom-color: util.$var-on-surface-color;
+
+        @include util.mix-responsive(
+            "display",
+            none,
+            (
+                "ml": block,
+            )
+        );
+    }
+    article {
+        @include util.mix-flex($direction: column, $align: flex-start, $justify: space-evenly);
+        height: 100%;
+        width: 100%;
+        margin: 0.5em;
+
+        footer {
+            align-self: flex-end;
+            text-align: right;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+    }
+}

@@ -1,24 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var announcement = require('../middleware/announcement');
+const express = require('express');
+const router = express.Router();
+const myMedia = require('../controllers/my-media');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-
-  const getResults = async function () {
-    const results = await Promise.all([announcement()]);
-    const a = results[0].values.reduce(function (prev, curr) {
-
-      prev = curr[0] == "FALSE" ? false : curr[0];
-
-      return prev;
-    }, '');
-
-    res.render('my-media', { title: 'LAUX the Author', type: 'my-media', announcement: a });
-  }
-
-  getResults();
-  
-});
+router.get('/', myMedia);
 
 module.exports = router;

@@ -1,0 +1,31 @@
+@use "../utilities" as util;
+@use "../vendors" as vend;
+
+.fa-quote {
+    color: util.$var-secondary-color;
+    width: 100%;
+}
+
+.fa-quote-left {
+    text-align: left;
+}
+
+.fa-quote-right {
+    text-align: right;
+}
+
+.default-icon {
+    color: util.$var-primary-color;
+}
+
+.icon {
+    transition: 0.3s;
+}
+
+.icon:hover {
+    color: util.$var-on-secondary-color;
+}
+
+.material-icons {
+    color: util.$var-secondary-color;
+}

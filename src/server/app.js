@@ -1,25 +1,24 @@
-var createError = require('http-errors');
+const createError = require('http-errors');
 // const auth = require('../middleware/auth');
-var express = require('express');
-var exphbs = require("express-handlebars");
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var favicon = require('serve-favicon');
-var index = require('../routes/index');
-var ourStory = require('../routes/our-story');
-var myStory = require('../routes/my-story');
-var events = require('../routes/events');
-var urbanGlossary = require('../routes/urban-glossary');
-var contactMe = require('../routes/contact-me');
-var purchaseYourCopy = require('../routes/purchase-your-copy');
-var myMedia = require('../routes/my-media');
-var book = require('../routes/to-all-the-places-ive-had-sex-before');
-var myTeam = require('../routes/my-team');
-var privacyPolicy = require('../routes/privacy-policy');
-var credits = require('../routes/credits');
-var helpers = require('handlebars-helpers')();
+const express = require('express');
+const exphbs = require("express-handlebars");
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
+const index = require('../routes/index');
+const yourStories = require('../routes/your-stories');
+const myStory = require('../routes/my-story');
+const events = require('../routes/events');
+const urbanGlossary = require('../routes/urban-glossary');
+const contactMe = require('../routes/contact-me');
+const purchaseYourCopy = require('../routes/purchase-your-copy');
+const myMedia = require('../routes/my-media');
+const book = require('../routes/to-all-the-places-ive-had-sex-before');
+const myTeam = require('../routes/my-team');
+const privacyPolicy = require('../routes/privacy-policy');
+const credits = require('../routes/credits');
 
 const app = express();
 app.use(favicon(path.join(__dirname, '../../dist/', 'favicon.ico')));
@@ -35,7 +34,7 @@ app.engine("hbs", exphbs({
   defaultLayout: "main",
   partialsDir: path.join(__dirname, '../', 'views/partials/'),
   extname: ".hbs",
-  helpers: require("../util/helpers.js").helpers
+  helpers: require("../util/handlebarsHelpers.js").helpers
 }));
 
 // view engine setup
@@ -49,7 +48,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../', 'dist')));
 
 app.use('/', index);
-app.use('/our-story', ourStory);
+app.use('/your-stories', yourStories);
 app.use('/my-story', myStory);
 app.use('/events', events);
 app.use('/urban-glossary', urbanGlossary);
@@ -60,7 +59,6 @@ app.use('/to-all-the-places-ive-had-sex-before', book);
 app.use('/my-team', myTeam);
 app.use('/privacy-policy', privacyPolicy);
 app.use('/credits', credits);
-// app.use('/us-map', mapRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,0 +1,14 @@
+<header>
+
+    {{> linearProgressBar id="main-progress-bar" }}
+
+    {{#if announcement}}
+    <div id="announcement-banner" class="">
+        <a class="close mdc-fab__icon text-on-background material-icons">close</a>
+        {{{parseAnnouncement announcement}}}
+    </div>
+    {{/if}}
+
+    {{> navigation }}
+
+</header>

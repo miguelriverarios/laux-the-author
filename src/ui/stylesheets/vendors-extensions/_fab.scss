@@ -1,0 +1,11 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+#purchase-fab {
+    @include vend.fab-accessible(util.$var-primary-color);
+    @include vend.fab-ink-color(util.$var-on-primary-color);
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    z-index:150;
+}

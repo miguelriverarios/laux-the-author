@@ -1,73 +1,70 @@
-var gulp = require('gulp');
-var sass = require('gulp-dart-sass');
-var prefix = require('gulp-autoprefixer');
-var concat = require('gulp-concat');
-var postcss = require('gulp-postcss');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-var nodemon = require('gulp-nodemon');
-var webpackStream = require('webpack-stream');
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var cssnano = require('cssnano');
-var config = require('./webpack.config');
+const gulp = require('gulp');
+const sass = require('gulp-dart-sass');
+const prefix = require('gulp-autoprefixer');
+const concat = require('gulp-concat');
+const replace = require('gulp-replace');
+const postcss = require('gulp-postcss');
+const browserSync = require('browser-sync');
+const reload = browserSync.reload;
+const nodemon = require('gulp-nodemon');
+const webpackStream = require('webpack-stream');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const config = require('./webpack.config');
+const merge = require('merge-stream');
 
-gulp.task('sass', function () {
-  var plugins = [
+gulp.task('fonts', function () {
+  return gulp.src(['node_modules/slick-carousel/slick/fonts/*', 'node_modules/@fortawesome/fontawesome-free/webfonts/*', 'node_modules/material-icons/iconfont/MaterialIcons?(Outlined|Round|Sharp|TwoTone)-Regular.?(eot|ttf|woff|woff2|svg|otf)'])
+    .pipe(gulp.dest('dist/fonts/webfonts/'));
+});
+
+gulp.task('images', function () {
+  return gulp.src(['node_modules/slick-carousel/slick/ajax-loader.gif'])
+    .pipe(gulp.dest('dist/images/'));
+});
+
+gulp.task('styles', function () {
+  const plugins = [
     autoprefixer(),
     cssnano()
   ];
-  return gulp.src('./src/ui/stylesheets/*.scss')
+  const scssStream = gulp.src('./src/ui/stylesheets/*.scss')
     .pipe(sass({
-      outputStyle: 'compressed',
+      outputStyle: 'expanded',
       sourceComments: 'map',
       includePaths: ['node_modules']
     },
       { errLogToConsole: true }))
+    .pipe(replace(/..\/webfonts/g, '../../fonts/webfonts'))
+    .pipe(concat('scss-files.css'))
+    .pipe(gulp.dest('src/ui/concat/'));
+
+    const cssStream = gulp.src('./src/ui/stylesheets/vendors/*.css')
+    .pipe(concat('css-files.css'))
+    .pipe(gulp.dest('src/ui/concat/'));
+
+  return merge(scssStream, cssStream)
     .pipe(postcss(plugins))
     .pipe(prefix("last 2 versions", "> 1%", "ie 8", "Android 2", "Firefox ESR"))
+    .pipe(concat('main.css'))
     .pipe(gulp.dest('dist/stylesheets/'))
     .pipe(reload({ stream: true }));
 });
 
+
 gulp.task('javascripts', function () {
-  return gulp.src(['./src/ui/javascripts/javascript.js',
-    './src/ui/javascripts/index.js',
-    './src/ui/javascripts/urban-glossary.js',
-    './src/ui/javascripts/contact-me.js',
-    './src/ui/javascripts/our-story.js',
-    './src/ui/javascripts/my-team.js',
-    './src/ui/javascripts/events.js',
-    './src/ui/javascripts/purchase-your-copy.js',
-    './src/ui/javascripts/main.js'])
-    .pipe(concat('concat.js'))
-    .pipe(gulp.dest('src/ui/javascripts/'))
+  return gulp.src(['./src/ui/javascripts/*.js'])
     .pipe(webpackStream(config, webpack))
-    .pipe(gulp.dest('dist/javascripts/'));
+    // .pipe(concat('js-files.js'))
+    // .pipe(gulp.dest('src/ui/concat/'))
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest('dist/javascripts/'))
+    .pipe(reload({ stream: true }));
 });
-
-// gulp.task('svgPanZoom', function () {
-//   return gulp.src(['./dist/js/svg-pan-zoom/svg-pan-zoom.js'])
-//     .pipe(concat('svg-pan-zoom2.min.js'))
-//     .pipe(webpackStream(config, webpack))
-//     .pipe(gulp.dest('dist/js/svg-pan-zoom/'));
-// });
-
-gulp.task('browser-sync', ['nodemon'], function () {
-  browserSync.init(null, {
-    proxy: "http://localhost:5000"
-  });
-});
-
-gulp.task('start', ['sass', 'javascripts', 'browser-sync'], function () {
-  gulp.watch("src/ui/stylesheets/**/*.scss", ['sass']);
-  gulp.watch("src/ui/javascripts/**/*.js", ['javascripts']);
-  gulp.watch(["dist/javascripts/**/*.js", "src/views/**/*.hbs"], reload);
-});
-
 
 gulp.task('nodemon', function (cb) {
-  var called = false;
+  let called = false;
   return nodemon({ script: 'src/bin/www' }).on('start', function () {
     if (!called) {
       called = true;
@@ -75,3 +72,19 @@ gulp.task('nodemon', function (cb) {
     }
   });
 });
+
+gulp.task('browser-sync', gulp.series('nodemon', function (done) {
+  browserSync.init(null, {
+    proxy: "http://localhost:5000"
+  });
+
+  gulp.watch("src/ui/stylesheets/**/*.scss", gulp.series('styles'));
+  gulp.watch("src/ui/javascripts/**/*.js", gulp.series('javascripts'));
+  gulp.watch("src/views/**/*.hbs", function (done) {
+    reload();
+    done();
+  });
+  done();
+}));
+
+gulp.task('start', gulp.series('styles', 'javascripts', 'fonts', 'images', 'browser-sync'));

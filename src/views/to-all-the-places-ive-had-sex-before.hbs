@@ -1,76 +1,95 @@
-<section class="hero-container">
-        <span id="book-hero" class="hero">
-        </span>
-        <div class="hero-content">
-            <p class="small-text">To All the Places<br>I've Had Sex Before</p>
-            <p class="main-text">The book that started it all</p>
+<section class="hero">
+    <img src="../../images/book-cover.jpg" alt="{{type}} hero banner" />
+    <article>
+        <h1>To All the Places I've Had Sex Before</h1>
+        <h2>The book that started it all</h2>
+    </article>
+</section>
+
+<div class="mdc-layout-grid--main">
+    <div class="mdc-layout-grid__inner--main">
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-4-desktop mdc-layout-grid--align-center">
+            <img class="mdc-elevation-z1" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg"
+                alt="To All the Places I've Had Sex Cover" height="300px">
         </div>
-    </section>
-
-<div class="main-content-container">
-    {{!-- <div style="text-align:center">
-        <h1>To All the Places I've Had Sex</h1>
-    </div> --}}
-
-    <div class="book-summary">
-        <img class="mdc-elevation-z1" style="margin-right: 1em;" id="book1" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg"
-            alt="To All the Places I've Had Sex Cover" height="300px">
-
-        <div>
-            <p>
-                What happens when you spend years keeping your secrets to yourself, unprocessed and unforgotten? When
-                you
-                have
-                obtained an identity, but you’re not sure how or why?
-            </p>
-            <p>
-                To All The Places I’ve Had Sex Before is an expirement in truth-telling. Writing it was an opportunity
-                to
-                acknowledge the past, to contextualize it with my history and culture, and to learn from it.
-            </p>
-            <p>
-                This book explores the ever so visible, yet ever so stigmatized subject of sex. To All The Places I’ve
-                Had
-                Sex
-                Before is an intimate journey that begs the question, what does it mean to truly be sexually liberated
-                and
-                what
-                measures does it take to get there, exploring the notions of private and public, the importance of
-                reflection,
-                and the difficulty of taking action.
-            </p>
-            <p>
-                To All The Places I’ve Had Sex Before is a set of personal narrative essays that explore the true
-                meaning of
-                sexual liberation for LAUX the author.
-            </p>
-        </div>
-    </div>
-
-    <form action="/purchase-your-copy" style="text-align:center">
-    {{!-- <div>Note: The book will be avilable for order soon!</div> --}}
-        <button id="btn" type="submit" class="mdc-button-purchase mdc-button mdc-button--outlined" data-mdc-auto-init="MDCRipple">
-            <div class="mdc-button__ripple"></div>
-            <span class="mdc-button__label">Purchase Your Copy</span>
-        </button>
-    </form>
-
-    {{#each praise}}
-    <div class="image-description book-description">
-        <i class="fa fa-quote fa-quote-left mdc-theme--primary fa-3x" aria-hidden="true" 
-        style="align-self: flex-start;"></i>
-            <div>
+        <div class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-8-desktop">
+            <article class="text-on-background">
                 <p>
-                   {{quote}} 
+                    What happens when you spend years keeping your secrets to yourself, unprocessed and
+                    unforgotten? When
+                    you
+                    have
+                    obtained an identity, but you’re not sure how or why?
                 </p>
-                <p class="quote-attribution">
-                    {{person}}<br/>
-                    <i>{{organization}}</i>
+                <p>
+                    To All The Places I’ve Had Sex Before is an expirement in truth-telling. Writing it was an
+                    opportunity
+                    to
+                    acknowledge the past, to contextualize it with my history and culture, and to learn from it.
                 </p>
-            </div>
-            <i class="fa fa-quote fa-quote-right mdc-theme--primary fa-3x" aria-hidden="true"
-        style="align-self: flex-end;"></i>
-    </div>
-    {{/each}}
+                <p>
+                    This book explores the ever so visible, yet ever so stigmatized subject of sex. To All The
+                    Places I’ve
+                    Had
+                    Sex
+                    Before is an intimate journey that begs the question, what does it mean to truly be sexually
+                    liberated
+                    and
+                    what
+                    measures does it take to get there, exploring the notions of private and public, the
+                    importance of
+                    reflection,
+                    and the difficulty of taking action.
+                </p>
+                <p>
+                    To All The Places I’ve Had Sex Before is a set of personal narrative essays that explore the
+                    true
+                    meaning of
+                    sexual liberation for LAUX the author.
+                </p>
+            </article>
+        </div>
 
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid--align-center">
+            <form action="/purchase-your-copy">
+                <button type="submit" class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">Purchase Your Copy</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet">
+            <h3 class="separator">Check out what the critics are saying</h3>
+        </div>
+
+        {{#each payload}}
+        <div class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop">
+            <section class="text-on-background quote">
+                <i class="fa fa-quote fa-quote-left fa-3x" aria-hidden="true"></i>
+                <article>
+                    <main>
+                        <p>
+                            {{quote}}
+                        </p>
+                    </main>
+                    <footer>
+                        <p>
+                            {{person}}<br />
+                            {{organization}}
+                        </p>
+                    </footer>
+                </article>
+                <i class="fa fa-quote fa-quote-right fa-3x" aria-hidden="true"></i>
+                {{#if isNotLast}}
+                <div class="rounded-seperator">
+                    <div></div>
+                </div>
+                {{/if}}
+            </section>
+        </div>
+        {{/each}}
+    </div>
 </div>

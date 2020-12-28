@@ -1,0 +1,198 @@
+<section class="hero">
+  <img src="../../images/jet-cloud-landing-aircraft-46148.jpg" alt="{{type}} hero banner" />
+  <article>
+    <h1>Your Story</h1>
+    <h2>Share your story with us</h2>
+  </article>
+</section>
+
+<form action="/" method="POST" id="stories-form">
+  <div class="mdc-layout-grid--main">
+    <div class="mdc-layout-grid__inner--main">
+
+      <div id="first-grid-cell"
+        class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone">
+        <p class="text-on-background">To All The Places I’ve Had Sex Before is a set of personal narrative essays
+          that explore the true meaning of
+          sexual liberation for LAUX the author. But there are countless other stories that need to be told, share
+          your journey towards sexual
+          liberation and acceptance.</p>
+      </div>
+
+      <div id="map-container"
+        class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-8-desktop mdc-layout-grid__cell--main--span-5-tablet mdc-layout-grid__cell--main--span-4-phone">
+        <object type="image/svg+xml" data="../../images/world.svg" id="map">
+          World Map
+          <!-- fallback image in CSS -->
+        </object>
+
+        <div class="hidden-story-data">
+          <input class="countryCode hidden" value="{{payload.countryCode}}" readonly>
+          <input class="storiesSummary hidden" value="{{stringify payload.storiesSummary}}" readonly>
+        </div>
+
+        <div id="zoom-control" class="mdc-card mdc-elevation--z1">
+          <i id="zoom-in" class="btn mdc-icon-button material-icons">zoom_in</i>
+          <hr class="mdc-list-divider">
+          <i id="zoom-out" class="btn mdc-icon-button material-icons">zoom_out</i>
+        </div>
+
+        <div class="tooltip"></div>
+      </div>
+
+      <div
+        class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-4-desktop mdc-layout-grid__cell--main--span-3-tablet mdc-layout-grid__cell--main--span-4-phone">
+
+        {{> linearProgressBar id="previous-stories-progress" closedClass="mdc-linear-progress--closed"}}
+
+        <div id="previous-stories">
+          {{#each payload.stories}}
+          <section class="mdc-card horizontal-card">
+            <article>
+              <header>
+                <h3>{{country}} &#8212; {{cityState}}</h3>
+              </header>
+              <div class="main-and-footer">
+                <main class="story">
+                  {{#each story}}
+                  <p>{{this}}</p>
+                  {{/each}}
+                </main>
+                <footer>
+                  <p>Submitted by Anonymous - {{timestamp}}</p>
+                </footer>
+              </div>
+            </article>
+          </section>
+          {{/each}}
+        </div>
+
+      </div>
+
+      <div
+        class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone">
+        <h3 class="separator">Share your story below</h3>
+      </div>
+
+      <div
+        class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-7-desktop mdc-layout-grid__cell--main--span-4-tablet">
+
+        <label class="theme-light mdc-text-field mdc-text-field--outlined mdc-text-field--textarea"
+          data-mdc-auto-init="MDCTextField">
+          <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">Tell us your story...</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+          </span>
+          <span class="mdc-text-field__resizer">
+            <textarea id="story" name="story" class="story-form-input story-form-data-input mdc-text-field__input"
+              rows="6" cols="40" aria-label="Label"></textarea>
+          </span>
+        </label>
+
+      </div>
+
+      <div
+        class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--align-middle mdc-layout-grid__cell--main--span-4-desktop mdc-layout-grid__cell--main--span-3-tablet">
+
+        <div class="story-form-input mdc-select mdc-select--outlined" data-mdc-auto-init="MDCSelect">
+          <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span id="outlined-select-label" class="mdc-floating-label">In what country?</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+            <span class="mdc-select__selected-text-container">
+              <param id="country" name="country" class="mdc-select__selected-text story-form-data-input">
+              </param>
+            </span>
+            <span class="mdc-select__dropdown-icon">
+              {{> dropdownArrow}}
+            </span>
+          </div>
+
+          <div class="mdc-select__menu mdc-menu mdc-menu-surface">
+            <ul class="mdc-list">
+
+              <li tabindex="0" class="mdc-list-item mdc-list-item--disabled" data-value="">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="mdc-list-item__text">
+                </span>
+              </li>
+
+              {{#each payload.countries}}
+              <li class="mdc-list-item" data-value="{{@key}}">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="mdc-list-item__text">
+                  {{this.country}}
+                </span>
+              </li>
+              {{/each}}
+
+            </ul>
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+        <label class="theme-light mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+          <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label">In what city/state?</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+          </span>
+          <input type="text" class="story-form-input story-form-data-input mdc-text-field__input"
+            aria-labelledby="city-state" name="city-state" id="city-state">
+        </label>
+
+      </div>
+
+      <div
+        class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--align-middle mdc-layout-grid__cell--main--span-1-desktop mdc-layout-grid__cell--main--span-1-tablet">
+
+        <button disabled id="story-btn" type="submit"
+          class="story-btn mdc-button-submit mdc-button mdc-button--outlined" data-mdc-auto-init="MDCRipple">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">Submit</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+  </div>
+</form>
+
+{{> snackbar type="story" message="Thank you for sharing your story. Before appearing on the website, your submission
+will be reviewed by a member of our team to ensure this remains a safe space for all."}}
+
+
+<script id="card-template" type="text/x-handlebars-template">
+  \{{#each stories}}
+  <section class="mdc-card horizontal-card">
+    <article>
+      <header>
+        <h3>\{{country}} &#8212; \{{cityState}}</h3>
+      </header>
+      <div class="main-and-footer">
+        <main class="story">
+                  \{{#each story}}
+                  <p>\{{this}}</p>
+                  \{{/each}}
+                </main>
+        <footer>
+          <p>Submitted by Anonymous - \{{timestamp}}</p>
+        </footer>
+      </div>
+    </article>
+  </section>
+  \{{/each}}
+</script>

@@ -1,0 +1,181 @@
+@use "../utilities" as util;
+@use "../vendors" as vend;
+
+// Hero
+
+#splash-page {
+    height: calc(100vh - 52px);
+    padding: 0;
+    position: relative;
+    background-color: util.$var-primary-color;
+
+    .descriptors {
+        position: absolute;
+        top: 1.5em;
+        bottom: 0;
+        left: 2em;
+        color: util.$var-on-primary-color;
+        font-size: 3rem;
+        font-weight: bold;
+        height: 50%;
+        z-index: 3;
+
+        .space {
+            display: block;
+            margin-bottom: 0.25em;
+        }
+
+        .descriptor {
+            opacity: 0;
+            transform: translateY(0.25em);
+            transition: transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1),
+                opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+            text-transform: uppercase;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .final-descriptor {
+            @include util.mix-responsive(
+                "color",
+                util.$var-primary-color,
+                (
+                    1100px: util.$var-secondary-color,
+                )
+            );
+            font-family: CaviarDreamsBold;
+        }
+    }
+
+    #left-splash {
+        @include util.mix-absolutePosition(1);
+        @include util.mix-responsive(
+            "display",
+            none,
+            (
+                1100px: block,
+            )
+        );
+
+        span {
+            @include util.mix-absolutePosition();
+            background-image: url("../../images/LAUX-color/LAUX-color/main-bg.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: block;
+        }
+    }
+
+    #lines-splash {
+        @include util.mix-absolutePosition(2);
+        @include util.mix-responsive(
+            "display",
+            none,
+            (
+                1100px: block,
+            )
+        );
+
+        span {
+            @include util.mix-absolutePosition();
+            background-image: url("../../images/LAUX-color/LAUX-color/lines-bg.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: block;
+        }
+    }
+
+    #hero-logo {
+        @include util.mix-responsive(
+            "left",
+            0,
+            (
+                1100px: 35%,
+            )
+        );
+        @include util.mix-absolutePosition(1);
+
+        span {
+            @include util.mix-absolutePosition();
+            background-image: url("../../images/book-cover-light.png");
+            background-position: center;
+            display: block;
+
+            &::after {
+                @include util.mix-absolutePosition(1);
+                @include util.mix-responsive(
+                    "display",
+                    none,
+                    (
+                        "ml": block,
+                    )
+                );
+                content: "";
+                background: url("../../images/LAUX-color/LAUX-color/LAUX-blk-yellow-bg.png") no-repeat left center;
+                background-size: auto 100%;
+            }
+        }
+    }
+}
+
+// Social Media Marquee
+
+#social-media-marquee {
+    background-color: util.$var-secondary-color;
+    height: 40vh;
+
+    .slick-list.draggable,
+    .slick-track {
+        height: 100%;
+    }
+
+    .slick-slide {
+        & > div {
+            margin: auto;
+            padding: 0 1em;
+        }
+
+        &:hover {
+            background-color: rgba(util.$var-surface-color, 0.2);
+        }
+    }
+
+    a {
+        img {
+            height: 25vh;
+            border-radius: 10px;
+            border: 1px solid util.$var-surface-color;
+        }
+
+        footer {
+            text-align: right;
+        }
+    }
+}
+
+.slick-dots {
+    background-color: util.$var-secondary-color;
+    bottom: -15px;
+}
+
+// Highlights Section
+
+.image-caption {
+    @include util.mix-flex;
+}
+
+.highlights {
+    transition: transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+    &:hover {
+        transform: scale(1.05);
+
+        a {
+            color: util.$var-primary-color;
+            transition: 0.3s;
+        }
+    }
+}

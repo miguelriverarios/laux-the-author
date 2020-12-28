@@ -1,3 +1,5 @@
+//pm2 start ecosystem.config.js --env production
+
 module.exports = {
   apps : [{
     name: 'laux',

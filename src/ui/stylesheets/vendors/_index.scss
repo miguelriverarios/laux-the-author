@@ -1,0 +1,80 @@
+@use "utilities" as util;
+
+/** Material Design Icons **/
+@forward "material-icons/iconfont/material-icons" with (
+    $material-icons-font-path: '../../fonts/webfonts/'
+);
+
+/** Font Awesome **/
+@forward '@fortawesome/fontawesome-free/scss/fontawesome';
+// with (
+//$fa-font-path: ../../fonts/webfonts/
+//);
+@forward "@fortawesome/fontawesome-free/scss/fontawesome" as fa-*;
+@forward "@fortawesome/fontawesome-free/scss/brands" as b-*;
+@forward "@fortawesome/fontawesome-free/scss/regular" as r-*;
+@forward "@fortawesome/fontawesome-free/scss/solid" as s-*;
+@forward "@fortawesome/fontawesome-free/scss/v4-shims" as v4-*;
+
+/** Material Design **/
+@forward "@material/theme" as theme-* with (
+    $primary: util.$var-primary-color,
+    $on-primary: util.$var-on-primary-color,
+    $secondary: util.$var-secondary-color,
+    $on-secondary: util.$var-on-secondary-color,
+    $background: util.$var-background-color,
+    $surface: util.$var-surface-color,
+    $on-surface: util.$var-on-surface-color,
+    $error: util.$var-error-color,
+    $on-error: util.$var-on-error-color
+    // ,
+    // $text-colors: util.$var-text-colors,
+    // $text-emphasis: util.$var-text-emphasis
+);
+// @forward "@material/typography" with (
+//     $font-family: unquote("CaviarDreams")
+// );
+@forward "@material/tab-bar/mdc-tab-bar";
+@forward "@material/tab-scroller/mdc-tab-scroller";
+@forward "@material/tab-indicator/mdc-tab-indicator";
+@forward "@material/tab-indicator" as tab-indicator-*;
+@forward "@material/tab/mdc-tab";
+@forward "@material/tab" as tab-*;
+@forward "@material/button" as button-*;
+@forward "@material/fab" as fab-*;
+@forward "@material/fab/mdc-fab";
+@forward "@material/linear-progress/mdc-linear-progress";
+@forward "@material/textfield" as textfield-*;
+@forward "@material/snackbar" as snackbar-*;
+@forward "@material/snackbar/mdc-snackbar";
+@forward "@material/drawer" as drawer-*;
+@forward "@material/drawer/mdc-drawer";
+@forward "@material/list" as list-*;
+@forward "@material/list/mdc-list";
+@forward "@material/icon-button" as icon-button-*;
+@forward "@material/top-app-bar/mdc-top-app-bar";
+@forward "@material/data-table/data-table" as data-table-*;
+@forward "@material/data-table" as table-*;
+@forward "@material/card" as card-*;
+@forward "@material/dialog" as dialog-*;
+@forward "@material/chips" as chips-*;
+@forward "@material/chips/mdc-chips";
+@forward "@material/menu-surface/mdc-menu-surface";
+@forward "@material/menu-surface" as menu-surface-*;
+@forward "@material/menu/mdc-menu";
+@forward "@material/ripple" as ripple-*;
+@forward "@material/select/styles";
+@forward "@material/select" as select-*;
+@forward "@material/layout-grid" as layout-grid-* with (
+    $default-margin: util.$var-default-margin,
+    $default-gutter: util.$var-default-gutter
+);
+@forward "@material/switch" as switch-* with (
+    $baseline-theme-color: util.$var-secondary-color
+);
+@forward "@material/checkbox" as checkbox-*;
+@forward "@material/elevation" as elevation-*;
+
+/** Slick **/
+@forward "slick-carousel/slick/slick";
+@forward "slick-theme";

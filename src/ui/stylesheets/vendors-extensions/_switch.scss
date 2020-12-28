@@ -1,0 +1,17 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+@include vend.switch-core-styles;
+
+#switch-label-container {
+    color: util.$var-on-secondary-color;
+    text-align: right;
+}
+
+#switch-container {
+    text-align: left;
+}
+
+.mdc-switch {
+    @include vend.switch-toggled-on-color(util.$var-primary-color);
+}

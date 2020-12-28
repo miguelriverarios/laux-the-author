@@ -1,150 +1,59 @@
-{{> myTeamDrawer 
-id="ebonieDrawer"
-name="Ebonie Daley Hicks" 
-title="Book Tour Manager" 
-quote='"You are your best thing" - Toni Morrison' 
-image="../../images/ebonie.jpeg" 
-description="<p>As a true ENTJ, I've realized that if I want to experience all the things the world has to offer me,
-            then it is my responsibility to plan those experiences. As a travel enthusiast, avid reader, and
-            project manager by trade, I've decided to utilize my passion and talents in supporting my friend
-            Laux as she becomes a first-time, published Black woman author. I am excited to be her book tour
-            manager, and I hope to see you in your city or at a virtual book talk soon!</p>"}}
-
-{{> myTeamDrawer 
-id="preciousDrawer"
-name="Precious Jenkins" 
-title="Social Media Manager" 
-quote='"When I dare to be powerful, to use my strength in the service of my
-                        vision, then it becomes less and
-                        less important whether I am afraid." -Audre Lorde' 
-image="../../images/precious-cropped.jpg" 
-description="<p>Precious is an operations professional by day and social media manager by night. She currently
-                        manages Laux's online presence and branding on Instagram and Facebook.
-                        </p>
-                    <p>Precious is a fellow writer and storyteller. She believes in the importance of elevating
-                        marginalized
-                        voices, particularly those of Black women, in order to foster healing and create lasting change.
-                    </p>
-                    <p>Fun facts: Precious is a native Washingtonian, Michigan grad, and occasional stand-up comedian.
-                    </p>"}}
-
-{{> myTeamDrawer 
-id="miguelDrawer"
-name="Miguel Rivera Rios" 
-title="Data-for-Good Practitioner" 
-quote='"Why aren’t there more SF Black writers? There aren’t because there
-                        aren’t.
-                        What we don’t see, we assume can’t be. What a destructive assumption." -Octavia Butler' 
-image="../../images/miguel-cropped.jpg" 
-description="<p>Miguel briefly masqueraded as a biology PhD student, before he realized his passion lied in
-                        nonprofit work and education. He views himself as a self taught full stack developer and data
-                        scientist that like to use his skills to help his friends, his coworkers, and the world.</p>
-
-                    <p>Recently he helped bring Laux's book come to life in the form of this website.</p>"}}
+<aside id="team-drawer" class="mdc-drawer mdc-drawer--modal team-drawer" data-mdc-auto-init="MDCDrawer">
+    <header>
+        <a class="close material-icons mdc-fab__icon">close</a>
+        <h3></h3>
+        <h4></h4>
+    </header>
+    <img src="">
+    <main>
+    </main>
+    <footer>
+    </footer>
+</aside>
 
 <div class="mdc-drawer-scrim"></div>
 
 <div class="mdc-drawer-app-content">
-    <section class="hero-container">
-        <span id="team-hero" class="hero">
-        </span>
-        <div class="hero-content">
-            <p class="small-text">My Team</p>
-            <p class="main-text">This is the group that<br>helped make it happen</p>
-        </div>
+
+    <section class="hero">
+        <img src="../../images/itslit.jpg" alt="{{type}} hero banner" />
+        <article>
+            <h1>My Team</h1>
+            <h2>This is the group that helped make it happen</h2>
+        </article>
     </section>
 
-    <div id="my-team-container">
-        {{!-- <div>
-        <h1>This is the team</h1>
-    </div> --}}
+    <div class="mdc-layout-grid--main horizontal-card-grid">
+        <div class="mdc-layout-grid__inner--main">
 
-        <div id="ebonie" class="mdc-card team-card">
-            <img class="team-card-image" src="../../images/ebonie.jpeg" width="275px" height="275px">
-            <div class="team-card-text">
-                <div class="card-header team-card-header">
-                    <div class="card-title">
-                        <h2 class="mdc-typography--headline6">
-                            Ebonie Daley Hicks
-                        </h2>
-                        <h3 class="mdc-typography--subtitle2">
-                            Book Tour Manager
-                        </h3>
-                    </div>
-                </div>
-                <hr class="mdc-list-divider">
-                <div class="card-body team-card-body mdc-typography--body2">
-                    <div>Ebonie is a true ENTJ and realized that if she wants to experience all the things the world has
-                        to offer, then it is her responsibility to plan those experiences. As a travel enthusiast, avid
-                        reader, and project manager by trade, Ebonie decided to utilize her passion and talents in
-                        supporting her friend Laux as she became a first-time, published Black woman author. Ebonie is
-                        excited to be her book tour manager and hopes to see you in your city or at a virtual book talk
-                        soon!</div>
+            {{#each payload}}
 
-                    <div class="team-card-quote">"You are your best thing" - Toni Morrison</div>
-                </div>
+            <div
+                class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet">
+                <section id={{ix}} class="mdc-card open-drawer-on-click horizontal-card fixed-width">
+                    <img src="{{image}}">
+                    <article>
+                        <header>
+                            <h3>{{name}}</h3>
+                            <h4>{{title}}</h4>
+                        </header>
+                        <hr />
+                        <div class="main-and-footer">
+                            <main>
+                                {{#each description}}
+                                <p>{{this}}</p>
+                                {{/each}}
+                            </main>
+                            <footer>
+                                <p>{{quote}} - {{quoteAttribution}}</p>
+                            </footer>
+                        </div>
+                    </article>
+                </section>
             </div>
+
+            {{/each}}
+
         </div>
-
-        <div id="precious" class="mdc-card team-card">
-            <img class="team-card-image" src="../../images/precious-cropped.jpg" width="275px" height="275px">
-            <div class="team-card-text">
-                <div class="card-header team-card-header">
-                    <div class="card-title">
-                        <h2 class="mdc-typography--headline6">
-                            Precious Jenkins
-                        </h2>
-                        <h3 class="mdc-typography--subtitle2">
-                            Social Media Manager
-                        </h3>
-                    </div>
-                </div>
-                <hr class="mdc-list-divider">
-                <div class="card-body team-card-body mdc-typography--body2">
-                    <div>Precious is an operations professional by day and social media manager by night. She currently
-                        manages Laux's online presence and branding on Instagram and Facebook.</div>
-                    <br>
-                    <div>Precious is a fellow writer and storyteller. She believes in the importance of elevating
-                        marginalized
-                        voices, particularly those of Black women, in order to foster healing and create lasting change.
-                    </div>
-                    <br>
-                    <div>Fun facts: Precious is a native Washingtonian, Michigan grad, and occasional stand-up comedian.
-                    </div>
-                    <br>
-                    {{!-- <p class="no-margin">Favorite Black woman author quote:</p> --}}
-                    <div class="team-card-quote">"I am deliberate and afraid of nothing." - Audre Lorde </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="miguel" class="mdc-card team-card">
-            <img class="team-card-image" src="../../images/miguel-cropped.jpg" width="275px" height="275px">
-            <div class="team-card-text">
-                <div class="card-header team-card-header">
-                    <div class="card-title">
-                        <h2 class="mdc-typography--headline6">
-                            Miguel Rivera Rios
-                        </h2>
-                        <h3 class="mdc-typography--subtitle2">
-                            Data-for-Good Practitioner
-                        </h3>
-                    </div>
-                </div>
-                <hr class="mdc-list-divider">
-                <div class="card-body team-card-body mdc-typography--body2">
-                    {{!-- <a class="team-card-link default-link" href="/urban-glossary?word=Jezebel">blah blah blah</a> --}}
-                    <div>Miguel briefly masqueraded as a biology PhD student, before he realized his passion lied in
-                        nonprofit work and education. He views himself as a self taught full stack developer and data
-                        scientist that likes to use his skills to help his friends, his coworkers, and the world.</div>
-
-                    <div>Recently he helped bring Laux's book come to life in the form of this website.</div>
-                    <div class="team-card-quote">"Why aren’t there more SF Black writers? There aren’t because there
-                        aren’t.
-                        What we don’t see, we assume can’t be. What a destructive assumption." -Octavia Butler</div>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>

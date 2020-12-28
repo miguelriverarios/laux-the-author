@@ -1,164 +1,94 @@
-<section class="hero-container">
-    <span id="purchase-hero" class="hero">
-    </span>
-    <div class="hero-content">
-        <p class="small-text">Purchase Your Copy</p>
-        <p class="main-text">Check out where my book<br>is available</p>
-    </div>
+<section class="hero">
+    <img src="../../images/crop-seller-passing-purchases-in-paper-shopping-bags-4173174.jpg"
+        alt="{{type}} hero banner" />
+    <article>
+        <h1>Purchase Your Copy</h1>
+        <h2>Check out where you can find my book</h2>
+    </article>
 </section>
 
-<p style="text-transform:uppercase;text-align:center;font-size:1.5rem;">Thank you for supporting me and joining me on
-    this journey!</p>
+<div class="mdc-layout-grid--main">
+    <div class="mdc-layout-grid__inner--main">
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone mdc-layout-grid--align-center">
 
-<div id="purchase-container">
-    {{!-- <h3>Find the best place to purchase my book below</h3>
-    <p>My book is available in a lot of places. Some organizations are better than others. Check out my thoughts below.
-    </p> --}}
-    <a id="purchase-book-cover" class="default-link" href="/to-all-the-places-ive-had-sex-before"
-        style="margin-bottom:1.25em">
-        <div class="icon image-and-caption" style="width:225px;">
-            <div class="image-caption">
-                <i class="fa fa-chevron-down"></i>
-                <div>&nbsp;Read More About It</div>
-            </div>
-            <img class="image" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg"
-                alt="To All the Places I've Had Sex Before Book Cover" height="225px">
+            <h3 class="text-on-background">
+                THANK YOU FOR SUPPORTING ME AND JOINING ME ON THIS JOURNEY!
+            </h3>
+
         </div>
-    </a>
 
-    <div class="mdc-data-table" data-mdc-auto-init="MDCDataTable">
-        <table class="mdc-data-table__table" aria-label="Places to Purchase the Book">
-            <thead>
-                <tr class="mdc-data-table__header-row">
-                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Vendor</b></th>
-                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Type of Book</b></th>
-                    <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader"
-                        scope="col"><b>Price</b></th>
-                    {{!-- <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Supported
-                            Organizations</b></th> --}}
-                    {{!-- <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Description</b></th> --}}
-                    {{!-- <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Final Recommendation</b> --}}
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="mdc-data-table__content">
-                <tr id="autographed-paperback" style="cursor: pointer;" class="signed checkout mdc-data-table__row">
-                    <td style="color:white;font-weight:bold;" rowspan="4" class="signed base-font mdc-data-table__cell">
-                        Buy Directly From Me</td>
-                    <td style="color:white;font-weight:bold;" class="signed base-font mdc-data-table__cell">Autographed
-                        Paperback + Shipping (Within the US)</td>
-                    <td style="color:white;font-weight:bold;"
-                        class="signed base-font mdc-data-table__cell mdc-data-table__cell--numeric">$39.00</td>
-                </tr>
-                <tr id="autographed-paperback-international" style="cursor: pointer;"
-                    class="checkout mdc-data-table__row">
+        <div
+            class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid__cell--main--span-4-phone">
+            <div class="mdc-data-table" data-mdc-auto-init="MDCDataTable">
+                <table class="mdc-data-table__table" aria-label="Places to Purchase the Book">
+                    <thead>
+                        <tr class="mdc-data-table__header-row">
+                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Vendor</b>
+                            </th>
+                            <th class="mdc-data-table__header-cell hide-on-s" role="columnheader" scope="col">
+                                <b>Details</b>
+                            </th>
+                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><b>Type of
+                                    Book</b></th>
+                            <th class="mdc-data-table__header-cell hide-on-xs" role="columnheader" scope="col">
+                                <b>Includes
+                                    Shipping</b>
+                            </th>
+                            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+                                role="columnheader" scope="col"><b>Price</b></th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="mdc-data-table__content">
+                        {{#each payload}}
 
-                    <td style="color:white;font-weight:bold;" class="not-signed base-font mdc-data-table__cell">
-                        Autographed
-                        Paperback + Shipping (Outside the US)</td>
-                    <td style="color:white;font-weight:bold;"
-                        class="not-signed base-font mdc-data-table__cell mdc-data-table__cell--numeric">$54.00</td>
-                </tr>
-                <tr id="paperback" style="cursor: pointer;" class="checkout mdc-data-table__row">
+                        {{#if isStripe}}
+                        <tr id="{{stripeID}}" class="mdc-data-table__row checkout {{vendorClass}}">
+                            {{else}}
+                        <tr class="mdc-data-table__row {{vendorClass}}" onclick="window.location.href = '{{link}}';">
+                            {{/if}}
 
-                    <td style="color:white;font-weight:bold;" class="not-signed base-font mdc-data-table__cell">
-                        Paperback + Shipping (Within the US)</td>
-                    <td style="color:white;font-weight:bold;"
-                        class="not-signed base-font mdc-data-table__cell mdc-data-table__cell--numeric">$18.99</td>
-                </tr>
-                <tr id="paperback-international" style="cursor: pointer;" class="checkout mdc-data-table__row">
+                            {{#if keepCellInTable}}
 
-                    <td style="color:white;font-weight:bold;" class="not-signed base-font mdc-data-table__cell">
-                        Paperback + Shipping (Outside the US)</td>
-                    <td style="color:white;font-weight:bold;"
-                        class="not-signed base-font mdc-data-table__cell mdc-data-table__cell--numeric">$33.99</td>
-                </tr>
-                {{#each purchase}}
-                <tr style="cursor: pointer;" class="mdc-data-table__row" onclick="window.location.href = '{{link}}';">
-                    <td class="base-font mdc-data-table__cell">{{vendor}}</td>
-                    <td class="base-font mdc-data-table__cell">{{typeOfBook}}</td>
-                    <td class="base-font mdc-data-table__cell mdc-data-table__cell--numeric">{{cost}}</td>
-                    {{!-- <td class="base-font mdc-data-table__cell">{{orgs}}</td>
-                    <td class="base-font mdc-data-table__cell">{{desc}}</td>
-                    <td class="base-font center-text mdc-data-table__cell">
-                        <i class="{{getColor rec}} material-icons mdc-list-item__graphic" aria-hidden="true">
-                            {{rec}}
-                        </i>
-                    </td> --}}
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+                            <td class="base-font mdc-data-table__cell no-js-hover" rowspan="{{numDuplicates}}">
+                                {{vendor}}</td>
+                            <td class="base-font mdc-data-table__cell no-js-hover hide-on-s"
+                                rowspan="{{numDuplicates}}">
+                                {{description}}
+                            </td>
+
+                            {{/if}}
+
+                            <td class="clickable base-font mdc-data-table__cell vendor-{{vendorClass}}">{{typeOfBook}}</td>
+                            <td class="clickable base-font mdc-data-table__cell vendor-{{vendorClass}} hide-on-xs">
+
+                                <div class="mdc-checkbox mdc-checkbox--disabled">
+                                    {{#if includesShipping}}
+                                    <input type="checkbox" class="mdc-checkbox__native-control" checked />
+                                    {{else}}
+                                    <input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1" />
+                                    {{/if}}
+                                    <div class="mdc-checkbox__background">
+                                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                            <path class="mdc-checkbox__checkmark-path" fill="none"
+                                                d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                        </svg>
+                                        <div class="mdc-checkbox__mixedmark"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td
+                                class="clickable base-font mdc-data-table__cell mdc-data-table__cell--numeric vendor-{{vendorClass}}">
+                                {{cost}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    {{!-- <button id="checkout-button" data-secret="{{ session_id }}">
-        Checkout
-    </button> --}}
-
-    {{> snackbar type="purchase-success" message="Thank you for your support! You will receive a receipt via email shortly with order details."}}
-
-    {{!-- {{> snackbar type="purchase-cancel" message="Thank you for subscribing! I look forward to going on this journey with you!"}} --}}
-
 </div>
 
-<script>
-    var checkoutButton = $('.checkout');
-    //var checkoutButton = document.getElementById('signed-paperback-checkout');
-    var stripe = Stripe('pk_live_51H9yIQGLXd0wRqTHdbDzsByud4STz7KD1p1xDUdbtX0jFzhFCxtL9YY52VUUooRiILEvxjNbnMpO4wJK5ALBr7vc00s0oIrqdU');
-
-    checkoutButton.click(function () {
-        var id = $(this).attr('id');
-
-        // Create a new Checkout Session using the server-side endpoint you
-        // created in step 3.
-        $.post('/purchase-your-copy/checkout?type=' + id)
-            .then(function (response) {
-                return response;
-            })
-            .then(function (session) {
-                return stripe.redirectToCheckout({ sessionId: session.id });
-            })
-            .then(function (result) {
-                // If `redirectToCheckout` fails due to a browser or network
-                // error, you should display the localized error message to your
-                // customer using `error.message`.
-                if (result.error) {
-                    alert(result.error.message);
-                }
-            })
-            .catch(function (error) {
-                console.error('Error:', error);
-            });
-    });
-
-    $("td").hover(function () {
-
-        $el = $(this);
-
-        $el.parent().addClass("mdc-data-table-hover");
-
-        //console.log($el.attr('class'));
-        if ($el.parent().has('td[rowspan]').length == 0 && /not-signed/.test($el.attr('class'))) {
-
-            $el
-                .parent()
-                .prevAll('tr:has(td[rowspan]):first')
-                .find('td[rowspan]')
-                .addClass("mdc-data-table-hover");
-
-        }
-
-    }, function () {
-
-        /*$el
-            .parent()
-            .removeClass("mdc-data-table-hover")
-            .prevAll('tr:has(td[rowspan]):first')
-            .find('td[rowspan]')
-            .removeClass("mdc-data-table-hover");
-            */
-
-        $(".mdc-data-table-hover").removeClass("mdc-data-table-hover");
-
-    });
-</script>
+{{> snackbar type="purchase-success" message="Thank you for your support! You will receive a receipt via
+email shortly with order details."}}

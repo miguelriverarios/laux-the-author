@@ -1,0 +1,98 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+.wowbook-toolbar {
+    z-index: 100;
+}
+
+.wowbook-toolbar-container {
+    position: sticky;
+    padding-top: 10px;
+
+    .wowbook-controls {
+        background-color: util.$var-secondary-color;
+        border: 1px solid util.$var-on-primary-color;
+        background-image: none;
+        .wowbook-control {
+            color: util.$var-on-secondary-color;
+        }
+    }
+}
+
+.wowbook-container {
+    
+    .wowbook-book-container {
+        .wowbook-hardpage {
+            .wowbook-page-content {
+                background-color: util.$var-primary-color;
+                background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
+            }
+            .wowbook-page-content h3 {
+                font-family: "Beyno";
+                text-align: center;
+                font-size: 3rem;
+                color: util.$var-on-primary-color;
+            }
+            & > .wowbook-page-content {
+                @include util.mix-flex;
+            }
+        }
+        .wowbook-page-content {
+            .mdc-card {
+                background-color: white;
+                margin: 0.5em;
+
+                &.glossary-item {
+                    padding: 0.8em;
+                    border-radius: 0;
+                    color: black;
+
+                    hr {
+                        border-bottom: 1px solid rgba(util.$var-dark-background-color, 0.5);
+                        margin: 0.5em;
+                    }
+
+                    .glossary-word {
+                        color: util.$var-primary-color;
+                        font-size: 1rem;
+                        text-transform: uppercase;
+                    }
+                    .glossary-type {
+                        text-transform: lowercase;
+                    }
+                    .glossary-definition,
+                    .glossary-no-stress {
+                        color: util.$var-dark-background-color;
+                        @include util.mix-responsive(
+                            "font-size",
+                            0.7rem,
+                            (
+                                450px: 0.8rem,
+                                1100px: 1rem,
+                            )
+                        );
+                    }
+                    .glossary-stress {
+                        color: util.$var-primary-color;
+                    }
+                    .glossary-definition {
+                        ol {
+                            margin-top: 0;
+                            @include util.mix-responsive(
+                                "padding",
+                                0.6em,
+                                (
+                                    800px: auto,
+                                )
+                            );
+                        }
+                    }
+                }
+
+                .glossary-item-selected {
+                    background-color: rgba(util.$var-secondary-color, 0.8);
+                }
+            }
+        }
+    }
+}

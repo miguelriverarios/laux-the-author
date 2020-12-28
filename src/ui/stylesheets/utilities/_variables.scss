@@ -1,0 +1,130 @@
+$primary-color: #f3b534;
+$on-primary-color: #242b32;
+
+$secondary-color: #5d495b;
+$on-secondary-color: #f2e4b1;
+
+$background-color: #756660;
+$on-background-color: #f2e4b1;
+
+$dark-background-color: #242b32;
+$on-dark-background-color: #f3b534;
+
+// Lighter version of original #F2E4B1
+$surface-color: #f2e4b1;
+$on-surface-color: #242b32;
+
+$error-color: #b00020;
+$on-error-color: #ffffff;
+
+$text-colors: (
+    dark: (
+        primary: rgba($on-primary-color, 0.87),
+        secondary: rgba($on-secondary-color, 0.54),
+        hint: rgba($on-secondary-color, 0.38),
+        disabled: rgba($secondary-color, 0.38),
+        icon: rgba($primary-color, 0.38),
+    ),
+    light: (
+        primary: white,
+        secondary: rgba(white, 0.7),
+        hint: rgba(white, 0.5),
+        disabled: rgba(white, 0.5),
+        icon: rgba(white, 0.5),
+    ),
+);
+
+$text-emphasis: (
+    high: 0.87,
+    medium: 0.6,
+    disabled: 0.38,
+);
+
+$named-breakpoints: (
+    "xs": 400px,
+    "s": 600px,
+    "m": 800px,
+    "ml": 1100px,
+    "l": 1420px,
+    "xl": 2100px,
+    "ipad": (
+        min-device-width 768px,
+    )
+    (
+        max-device-width 1024px,
+    ),
+);
+
+$min-image-size: 150px;
+$image-size-breakpoints: (
+    "xs": 175px,
+    "s": 200px,
+    "m": 250px,
+    "ml": 275px,
+);
+
+$min-image-size-vertical: 225px;
+$image-size-breakpoints-vertical: (
+    "xs": 250px,
+    "s": 300px,
+    "m": 325px,
+    "ml": 350px,
+);
+
+$grid-types: main, footer;
+
+// NOTE: Cannot use shorthand notation for margin / padding if also using Fixed Column Width style
+// as out-of-the-box mixin requires one number
+$default-margin: (
+    main: (
+        desktop: 2em 10em,
+        tablet: 1em 6em,
+        phone: 1em 3em,
+    ),
+    footer: (
+        desktop: 2em 10em,
+        tablet: 1em 5em,
+        phone: 1em 2em,
+    ),
+);
+
+$default-gutter: (
+    main: (
+        desktop: 1em,
+        tablet: 1em,
+        phone: 1em,
+    ),
+    footer: (
+        desktop: 0,
+        tablet: 0,
+        phone: 0,
+    ),
+);
+
+$border-radius: 4px;
+
+$themes: (
+    light: (
+        background: $background-color,
+        default: $on-secondary-color,
+        hover: $primary-color,
+        focus: $primary-color,
+        disabled: $on-secondary-color,
+    ),
+    dark: (
+        background: $dark-background-color,
+        default: $primary-color,
+        hover: $on-secondary-color,
+        focus: $on-secondary-color,
+        disabled: $primary-color,
+    ),
+);
+
+$select-dropdown-colors: (
+    default: $on-secondary-color,
+    hover: $primary-color,
+    focus: $primary-color,
+    disabled: $on-secondary-color,
+);
+
+$table-column-widths: 15%, 30%, 30%, 10%, 15%;

@@ -1,55 +1,59 @@
-var windowHeight = $(window).height();
-var initBook = windowHeight >= 900 ? 3
-        : windowHeight >= 650 ? 2
-        : windowHeight >= 400 ? 1
-        : 0;
+require('./vendors/jquery-global.js');
+// Not using wow_book.min.js because I wanted to incorporated
+// the code in bundle.js, so merging all files manually
+require('hammerjs');
+require('jquery-hammerjs');
+require('./vendors/modernizr.js');
+require('./vendors/jquery.easing.custom.1.3.js');
+require('./vendors/wow_book.js');
 
-$("#urban-glossary" + initBook).bind("bookletstart", function (event, data) {
-    if (data.index !== 0) $("#look-inside").hide();
-    $("#urban-glossary" + initBook).addClass("page-turning");
-});
+//////////////////
+//
+// Init Wowbook
+//
+//////////////////
 
-$("#book-container").mousemove(function (e) {
-    var pageControlsHeight = $("#page-controls-container").height();
-    var tabBarHeight = $(".mdc-tab-bar").height();
-    var glossaryHeight = $("#urban-glossary" + initBook).height();
-    var book = $(this).children("#urban-glossary" + initBook);
-    var pages = book.children();
-    var firstPage = pages.eq(2);
-    var isOnCover = !firstPage.attr('class') ? false
-            : firstPage.attr('class').indexOf('ui-draggable') !== -1;
-
-    if (e.pageY >= pageControlsHeight + tabBarHeight && e.pageY <= pageControlsHeight + tabBarHeight + glossaryHeight) {
-        
-        var isTurning = !book.attr('class') ? false
-            : book.attr('class').indexOf('page-turning') !== -1;
-        
-        var cover = pages.eq(1);
-        
-        
-        var min = $(window).width() * 0.75 - 100;
-        var max = $(window).width() * 0.75;
-
-        if (isOnCover && !isTurning) {
-            if (e.pageX >= min && e.pageX <= max) $("#look-inside").fadeOut(500);
-            else {
-                // console.log(2);
-                $("#look-inside").fadeIn(500);
-            }
-        }
-    } else if (isOnCover) {
-        // console.log(1);
-        $("#look-inside").fadeIn(500);
+const tabBarHeight = $(".mdc-tab-bar").height();
+const windowHeight = $(window).height();
+const height = windowHeight - tabBarHeight - 100;
+var width = $(window).width();
+const options = {
+    width: width < 1100 ? width * 2 : width
+    , height: height
+    , hardcovers: true
+    , deepLinking: false
+    , updateBrowserURL: false
+    , container: true
+    , containerPadding: "10px"
+    , toolbarPosition: "top"
+    , flipSound: false
+    , responsiveSinglePage: function (book) {
+        return $("main").width() < 1100;
     }
-});
+    , centeredWhenClosed: true
+    , toolbar: "first, back, next, last, zoomin, zoomout, fullscreen"
+};
+let initBook = width >= 400 & windowHeight >= 900 ? 3
+    : width >= 400 & windowHeight >= 650 ? 2
+        : width >= 400 & windowHeight >= 400 ? 1
+            : 0;
+initBook = 3;
 
-$("#urban-glossary" + initBook).bind("bookletchange", function (event, data) {
-    if (data.index === 0) $("#look-inside").show();
-    else $("#look-inside").hide();
-    $("#urban-glossary" + initBook).removeClass("page-turning");
-});
+$('#urban-glossary' + initBook).wowBook(options);
 
-$(".b-selector.b-selector-page ul li").click(function() {
-    $(".b-selector.b-selector-page ul").slideUp();
-})
-// $("#look-inside").css("right", $(window).width() / 4 + 15 + 'px');
+for (var i = 0; i < 4; i++) {
+    if (i != initBook) {
+        $('#urban-glossary' + i).hide();
+    }
+}
+
+//////////////////
+//
+// Got to Page
+//
+//////////////////
+
+// Will build this out when it is actually in use
+
+//var ix = "{{ getPageIndex items word }}".split(',')[initBook];
+//$('#urban-glossary' + initBook).wowBook("gotopage", ix);

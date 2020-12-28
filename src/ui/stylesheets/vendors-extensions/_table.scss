@@ -1,0 +1,46 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+@include vend.data-table-core-styles;
+@include vend.data-table-theme-baseline;
+
+.clickable {
+    cursor: pointer;
+}
+
+.mdc-data-table {
+    @include vend.elevation-elevation(3);
+    @include vend.table-header-row-fill-color(util.$var-secondary-color);
+    @include vend.table-header-row-text-color(util.$var-on-secondary-color);
+    @include vend.table-row-hover-fill-color(rgba(util.$var-secondary-color, 0));
+    @include vend.table-column-widths(util.$var-table-column-widths);
+    width: 100%;
+
+    .mdc-data-table__table {
+        white-space: normal;
+
+        .hide-on-s {
+            @include util.mix-responsive(
+                "display",
+                none,
+                (
+                    "s": table-cell,
+                )
+            );
+        }
+
+        .hide-on-xs {
+            @include util.mix-responsive(
+                "display",
+                none,
+                (
+                    "xs": table-cell,
+                )
+            );
+        }
+
+        .mdc-data-table-hover {
+            background-color: rgba(util.$var-secondary-color, 0.08);
+        }
+    }
+}

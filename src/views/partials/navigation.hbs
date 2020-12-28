@@ -1,0 +1,92 @@
+<!-- Navigation Tabs -->
+
+<div class="mdc-tab-bar" role="tablist" data-mdc-auto-init="MDCTabBar">
+
+    <div class="tab-container">
+        {{> logo }}
+
+        <div class="mdc-tab-scroller">
+            <div class="mdc-tab-scroller__scroll-area">
+                <div class="mdc-tab-scroller__scroll-content">
+
+                    {{#each tabsAndMenus.tabs}}
+
+                    {{#if displayInNav}}
+                    <a id="{{name}}-tab" href="/{{name}}" class="mdc-tab {{isActiveTabClass ../tabType name}}"
+                        role="tab" aria-selected="{{isActiveBoolean ../tabType name}}"
+                        tabindex="{{isActiveIndex ../tabType name}}" aria-controls="{{name}}"
+                        data-mdc-auto-init="MDCTab">
+                        <span class="mdc-tab__content">
+                            <span class="default-tab-color mdc-tab__text-label">{{label}}</span>
+                        </span>
+                        <span class="{{isActiveIndicatorClass ../tabType name}}">
+                            <span id="my-story-indicator"
+                                class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span id="{{name}}-ripple" class="mdc-tab__ripple"></span>
+                    </a>
+                    {{/if}}
+
+                    {{#if isNotLast}}
+                    <span class="pipe pipe-navigation">|</span>
+                    {{/if}}
+
+                    {{/each}}
+
+                    <a class="overflow-menu">
+                        <button id="overflow-menu"
+                            class="tab-bar-icon material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation Drawer (Mobile Only) -->
+
+<aside class="mdc-drawer mdc-drawer--modal mdc-drawer-navigation" dir="rtl" data-mdc-auto-init="MDCDrawer">
+    <div class="mdc-drawer__content">
+        <nav class="mdc-list" dir="ltr">
+
+            <a class="{{isActiveDrawerClass type 'index'}} progress-bar-click" href="/" tabindex="0">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
+                    <img id="logo" src="{{isActiveDrawerLogo type 'index'}}" alt="Laux Logo" height="25px">
+                </i>
+                <span class="mdc-list-item__text">Home</span>
+            </a>
+
+            {{#each tabs}}
+            <a class="{{isActiveDrawerClass ../type name}} progress-bar-click" href="/{{name}}"
+                tabindex="{{drawerIndex ../type name}}">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">{{icon}}
+                </i>
+                <span class="mdc-list-item__text">{{label}}</span>
+            </a>
+            {{/each}}
+
+        </nav>
+    </div>
+</aside>
+
+<div class="mdc-drawer-scrim"></div>
+
+<!-- Navigation Menus -->
+
+{{#each tabsAndMenus.menus}}
+<div id="{{@key}}-menu" class="menu-navigation mdc-menu-{{@key}} mdc-menu mdc-menu-surface"
+    data-mdc-auto-init="MDCMenu">
+    <ul id="{{@key}}-list" class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+        {{#each this}}
+        <li class="mdc-list-item" role="menuitem">
+            <span class="mdc-list-item__text">
+                <a href="/{{name}}" class="{{@../key}}-menu-item progress-bar-click">
+                    {{label}}
+                </a>
+            </span>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+{{/each}}

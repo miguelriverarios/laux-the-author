@@ -1,0 +1,12 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+section#video {
+    height: 50vh;
+
+    iframe {
+        border: 0;
+        width: 100%;
+        height: 100%;
+    }
+}

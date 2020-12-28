@@ -1,0 +1,48 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+@include vend.button-core-styles;
+
+.mdc-button {
+    transition: box-shadow 0.28s cubic-bezier(.4,0,.2,1), -webkit-box-shadow 0.28s cubic-bezier(.4,0,.2,1);
+    @include vend.button-height(3em);
+    width: 100%;
+}
+
+.mdc-button-card {
+    @include vend.button-ink-color(util.$var-secondary-color);
+    // @include vend.ripple-states(red, true);
+    
+    // &:hover {
+    //     background-color:rgba(util.$var-secondary-color, 0.08);
+    // }
+    
+}
+
+.mdc-button .mdc-button__ripple:after, .mdc-button .mdc-button__ripple:before {
+    background-color: util.$var-secondary-color;
+}
+
+#subscribe-button {
+    @include util.mix-responsive(
+        "display",
+        block,
+        (
+            "ml": none
+        )
+    );
+
+    &:hover {
+        @include vend.button-ink-color(util.$var-on-secondary-color);
+    }
+}
+
+#subscribe-icon {
+    @include util.mix-responsive(
+        "display",
+        none,
+        (
+                "ml": block
+        )
+    );
+}

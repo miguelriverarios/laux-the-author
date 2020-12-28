@@ -3,5 +3,11 @@ dist/
 src/middleware/privatekey.json
 .env
 yarn.lock
-lauxtheauthor.com.zip
+yarn-error.log
 ssl
+src/ui/javascripts/vendors/modernizer.js
+src/ui/javascripts/vendors/wow_book.js
+src/ui/javascripts/vendors/jquery.easing.custom.1.3.js
+src/ui/stylesheets/vendors/wow_book.css
+src/ui/stylesheets/vendors/_slick-theme.scss
+maintenance.html

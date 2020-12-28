@@ -1,0 +1,9 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+.mdc-floating-label:not(.mdc-floating-label--float-above) {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}

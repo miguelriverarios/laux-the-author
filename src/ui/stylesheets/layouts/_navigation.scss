@@ -1,0 +1,169 @@
+@use "../utilities" as util;
+@use "../vendors" as vend;
+
+@include vend.icon-button-core-styles;
+@include vend.drawer-core-styles;
+@include vend.drawer-dismissible-core-styles;
+@include vend.drawer-modal-core-styles;
+@include vend.list-core-styles;
+
+/**
+*
+* Logo
+*
+**/
+
+#logo-container {
+    margin-left: 0.5em;
+    @include util.mix-flex();
+    text-transform: uppercase;
+    color: black;
+    text-decoration: none;
+}
+
+#logo-container,
+.mdc-tab-scroller {
+    margin-right: auto;
+}
+
+.logo {
+    background: url("../../images/LAUX-color/LAUX-color/LAUX-TheAuthor-yellow.png") center center no-repeat;
+    background-size: contain;
+
+    width: 93.48px;
+    height: 40px;
+
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.logo:hover {
+    background-image: url("../../images/LAUX-color/LAUX-color/LAUX-TheAuthor-lightyellow.png");
+}
+
+/**
+*
+* NAVIGATION TABS (DESKTOP NAVIGATION)
+*
+**/
+
+.mdc-tab-scroller {
+    margin-right: auto;
+}
+
+.mdc-tab-bar {
+    background-color: util.$var-dark-background-color;
+}
+
+body > header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.tab-bar-scroll-text,
+.default-link-scroll,
+.mdc-tab .mdc-tab__text-label.default-text-scroll {
+    color: util.$var-primary-color;
+}
+
+.mdc-tab .mdc-tab__text-label,
+.default-tab-color,
+.tab-bar-icon {
+    color: util.$var-primary-color;
+}
+
+.mdc-tab {
+    @include vend.tab-active-text-label-color(util.$var-on-secondary-color);
+    @include vend.tab-states-color(util.$var-on-secondary-color);
+}
+
+.mdc-tab-indicator {
+    @include vend.tab-indicator-underline-color(util.$var-on-secondary-color);
+}
+
+.tab-container {
+    @include util.mix-flex();
+}
+
+.mdc-tab-scroller__scroll-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mdc-menu-my-story {
+    a {
+        color: util.$var-primary-color;
+        text-decoration: none;
+        outline: 0;
+    }
+
+    .mdc-list-item {
+        .mdc-list-item__text {
+            width: 100%;
+        }
+
+        &:hover {
+            background-color: rgba(util.$var-on-secondary-color, 0.08);
+        }
+    }
+}
+
+.mdc-menu-my-story {
+    z-index: 2000;
+    padding-top: 0;
+    position: fixed;
+    background-color: util.$var-dark-background-color;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: inherit;
+}
+
+@media (max-width: 1100px) {
+    .mdc-tab {
+        display: none;
+    }
+    .overflow-menu {
+        display: block;
+    }
+    .mdc-tab-scroller {
+        margin-right: 0;
+    }
+}
+
+.tab-bar-scroll {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 0px rgba(0, 0, 0, 0.14),
+        0px 10px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+/**
+*
+* NAVIGATION DRAWER (MOBILE NAVIGATION)
+*
+**/
+
+.mdc-drawer-scrim {
+    top: 52px;
+}
+
+.mdc-drawer-navigation {
+    z-index: 2000000;
+    top: 52px;
+
+    .mdc-list-item {
+        .mdc-list-item__graphic {
+            margin-left: 0 !important;
+            margin-right: 32px !important;
+            color: util.$var-dark-background-color;
+        }
+        .mdc-list-item__text {
+            color: util.$var-on-surface-color !important;
+        }
+    }
+
+    .mdc-list-item--activated {
+        background-color: rgba(util.$var-secondary-color, 0.2);
+    }
+}

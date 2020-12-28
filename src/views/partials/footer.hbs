@@ -1,0 +1,75 @@
+<footer class="text-on-dark-background">
+  <br>
+  <p class="no-margin">SUBSCRIBE AND STAY UP-TO-DATE</p>
+  <br>
+
+  <form method="POST" id="subscription-form">
+
+    <label class="theme-dark mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <span class="mdc-notched-outline">
+        <span class="mdc-notched-outline__leading"></span>
+        <span class="mdc-notched-outline__notch">
+          <span class="mdc-floating-label" id="first-name-label">First Name *</span>
+        </span>
+        <span class="mdc-notched-outline__trailing"></span>
+      </span>
+      <input type="text" class="subscription-form-input mdc-text-field__input" aria-labelledby="first-name-label"
+        name="first-name" id="first-name-subscribe">
+    </label>
+
+    <label class="theme-dark mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <input name="last-name" id="last-name-subscribe" class="subscription-form-input mdc-text-field__input" type="text"
+        aria-labelledby="last-name-label">
+      <span class="mdc-notched-outline">
+        <span class="mdc-notched-outline__leading"></span>
+        <span class="mdc-notched-outline__notch">
+          <span class="mdc-floating-label" id="last-name-label">Last Name *</span>
+        </span>
+        <span class="mdc-notched-outline__trailing"></span>
+      </span>
+    </label>
+
+    <label class="theme-dark mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+      <input name="email" id="email-subscribe" class="subscription-form-input mdc-text-field__input" type="text"
+        aria-labelledby="email-label">
+      <span class="mdc-notched-outline">
+        <span class="mdc-notched-outline__leading"></span>
+        <span class="mdc-notched-outline__notch">
+          <span class="mdc-floating-label" id="email-label">Email Address *</span>
+        </span>
+        <span class="mdc-notched-outline__trailing"></span>
+      </span>
+    </label>
+
+    <button id="subscribe-icon" class="text-on-dark-background subscribe-btn icon btn mdc-icon-button material-icons"
+      disabled>double_arrow</button>
+
+    <button id="subscribe-button" class="subscribe-btn mdc-button mdc-button--outlined" disabled>
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">Submit</span>
+    </button>
+
+    {{> snackbar type="success" message="Thank you for subscribing! I look forward to going on this journey with you!"}}
+
+
+  </form>
+
+  <p id="footer-links">
+    <span><a href="https://www.goodreads.com/book/show/54739986-to-all-the-places-i-ve-had-sex-before"
+        class="link-on-background">GOOD READS</a></span>
+    <span><a href="/contact-me" class="link-on-background">CONTACT ME</a></span>
+    <span><a href="/contact-me?requestType=event" class="link-on-background">WANT ME TO VISIT
+        YOU?</a></span>
+  </p>
+
+  <p style="font-size:2em;" class="social-media-buttons">
+    {{> socialMediaLinks classes="default-icon"}}
+  </p>
+
+  <p id="policy-links">
+    <span><a href="/privacy-policy" class="policy link-on-background">Privacy Policy</a></span>
+    &nbsp;&nbsp;<span class="pipe">|</span>&nbsp;&nbsp;
+    <span><a href="/credits" class="policy link-on-background">Credits</a></span>
+  </p>
+
+</footer>

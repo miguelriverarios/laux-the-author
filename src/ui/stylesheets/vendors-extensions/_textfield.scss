@@ -1,0 +1,83 @@
+@use "sass:map";
+@use "utilities" as util;
+@use "vendors" as vend;
+
+@include vend.textfield-core-styles;
+
+// #story-container {
+//     @include vend.textfield-fill-color(util.$var-surface-color);
+//     border-radius: util.$var-border-radius;
+// }
+
+.mdc-text-field {
+    @include vend.textfield-outline-shape-radius(0);
+}
+
+.mdc-text-field,
+.mdc-text-field--textarea {
+    width: 100%;
+}
+
+@each $theme in map.keys(util.$var-themes) {
+    .mdc-text-field {
+        &.theme-#{$theme} {
+            $background: map.get(map.get(util.$var-themes, $theme), background);
+            $default: map.get(map.get(util.$var-themes, $theme), default);
+            $hover: map.get(map.get(util.$var-themes, $theme), hover);
+            $focus: map.get(map.get(util.$var-themes, $theme), focus);
+
+            @include vend.textfield-hover-outline-color($hover);
+
+            &.mdc-text-field--focused {
+                @include vend.textfield-ink-color($focus);
+                @include vend.textfield-outline-color($focus);
+                @include vend.textfield-label-color($focus);
+                @include vend.textfield-caret-color($focus);
+            }
+            &:not(.mdc-text-field--focused) {
+                @include vend.textfield-ink-color($default);
+                @include vend.textfield-outline-color($default);
+                @include vend.textfield-label-color($default);
+                @include vend.textfield-caret-color($default);
+
+                &:hover {
+                    & .mdc-text-field__input {
+                        color: $hover;
+                    }
+                }
+            }
+            &:hover {
+                &:not(.mdc-text-field--focused) {
+                    @include vend.textfield-label-color($focus);
+                }
+            }
+            // Override Chrome autofill backgroun color for input fields
+            // https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete
+            & input:-webkit-autofill,
+            & input:-webkit-autofill:hover,
+            & input:-webkit-autofill:focus,
+            & input:-webkit-autofill:active {
+                box-shadow: 0 0 0 30px #{$background} inset !important;
+                -webkit-box-shadow: 0 0 0 30px #{$background} inset !important;
+            }
+
+            &.mdc-text-field--focused {
+                & input:-webkit-autofill,
+                & input:-webkit-autofill:hover,
+                & input:-webkit-autofill:focus,
+                & input:-webkit-autofill:active {
+                    -webkit-text-fill-color: $focus;
+                }
+            }
+
+            &:not(.mdc-text-field--focused) {
+                & input:-webkit-autofill,
+                & input:-webkit-autofill:hover,
+                & input:-webkit-autofill:focus,
+                & input:-webkit-autofill:active {
+                    -webkit-text-fill-color: $default;
+                }
+            }
+        }
+    }
+}

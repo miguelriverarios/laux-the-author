@@ -1,0 +1,74 @@
+@use "../utilities" as util;
+@use "../vendors" as vend;
+
+* {
+    font-family: CaviarDreams;
+    font-weight: bold;
+}
+
+.mdc-data-table__cell, .mdc-dialog__title {
+    font-family: CaviarDreams;
+    font-weight: bold;
+}
+
+.no-link-decoration {
+    text-decoration: none;
+}
+
+.default-link {
+    color: util.$var-on-secondary-color;
+    text-decoration: none;
+    outline: 0;
+    transition: 0.3s;
+
+    &:hover {
+        color: util.$var-primary-color;
+    }
+}
+
+.link-on-background {
+    color: util.$var-primary-color;
+    text-decoration: none;
+    outline: 0;
+    transition: 0.3s;
+
+    &:hover {
+        color: util.$var-on-secondary-color;
+    }
+}
+
+h1,
+h2 {
+    color: util.$var-primary-color;
+}
+
+.text-on-surface {
+    color: util.$var-on-surface-color;
+
+    p {
+        color: util.$var-on-surface-color;
+    }
+}
+
+.text-on-background {
+    color: util.$var-on-background-color;
+
+    p {
+        color: util.$var-on-background-color;
+    }
+}
+
+.text-on-dark-background {
+    color: util.$var-on-dark-background-color;
+
+    p {
+        color: util.$var-on-dark-background-color;
+    }
+}
+
+.quote {
+    footer {
+        text-align: right;
+        text-transform: uppercase;
+    }
+}

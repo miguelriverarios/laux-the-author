@@ -1,0 +1,8 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+.mdc-snackbar {
+    @include vend.snackbar-fill-color(util.$var-primary-color);
+    @include vend.snackbar-label-ink-color(util.$var-dark-background-color);
+    z-index: 1000;
+}

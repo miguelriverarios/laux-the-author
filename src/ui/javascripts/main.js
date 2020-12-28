@@ -1,87 +1,184 @@
-var url = 'https://script.google.com/macros/s/AKfycbygYiSXlhf4EtyPgYTKoW1atdOL0hZueTAP1jgPaQlYmRYFoNaU/exec';
+const { mdcAutoInit } = require('@material/auto-init');
+const { MDCTabBar } = require('@material/tab-bar');
+const { MDCTab } = require('@material/tab');
+const { MDCRipple } = require('@material/ripple');
+const { MDCLinearProgress } = require('@material/linear-progress');
+const { MDCTextField } = require('@material/textfield');
+const { MDCSnackbar } = require('@material/snackbar');
+const { MDCDrawer } = require('@material/drawer');
+const { MDCTopAppBar } = require('@material/top-app-bar');
+const { MDCDataTable } = require('@material/data-table');
+const { MDCDialog } = require('@material/dialog');
+const { MDCList } = require('@material/list');
+const { MDCChipSet } = require('@material/chips');
+const { MDCSelect } = require('@material/select');
+const { MDCMenu } = require('@material/menu');
+const { MDCSwitch } = require('@material/switch');
+const Cookies = require('js-cookie');
+const validateFields = require('../../util/validateFields');
+const submitData = require('../../util/submitData');
+const toggleProgressBar = require('../../util/toggleProgressBar');
+require('./vendors/jquery-global.js');
 
-$(window).scroll(function () {
-    var scroll = $(window).scrollTop();
-    var splashFab = $("#splash-fab");
-    var purchaseFab = $("#purchase-fab");
+//////////////////
+//
+// Init MDC
+//
+//////////////////
+
+mdcAutoInit.register('MDCRipple', MDCRipple);
+mdcAutoInit.register('MDCTabBar', MDCTabBar);
+mdcAutoInit.register('MDCLinearProgress', MDCLinearProgress);
+mdcAutoInit.register('MDCTextField', MDCTextField);
+mdcAutoInit.register('MDCSnackbar', MDCSnackbar);
+mdcAutoInit.register('MDCDrawer', MDCDrawer);
+mdcAutoInit.register('MDCDataTable', MDCDataTable);
+mdcAutoInit.register('MDCDialog', MDCDialog);
+mdcAutoInit.register('MDCList', MDCList);
+mdcAutoInit.register('MDCChipSet', MDCChipSet);
+mdcAutoInit.register('MDCSelect', MDCSelect);
+mdcAutoInit.register('MDCMenu', MDCMenu);
+mdcAutoInit.register('MDCSwitch', MDCSwitch);
+mdcAutoInit.register('MDCTab', MDCTab);
+
+mdcAutoInit();
+
+//////////////////
+//
+// Init Navigation
+//
+//////////////////
+
+const drawer = $('.mdc-drawer')[0].MDCDrawer;
+const topAppBar = MDCTopAppBar.attachTo($('.overflow-menu')[0]);
+
+topAppBar.listen('MDCTopAppBar:nav', () => {
+    drawer.open = !drawer.open;
+});
+
+//////////////////
+//
+// Tab Bar Menu
+//
+//////////////////
+
+const tab = $('#my-story-tab');
+const header = $('body > header');
+const menu = $('#my-story-menu');
+const mdcMenu = menu[0].MDCMenu;
+
+$("#my-story-tab, #my-story-menu").on('mouseenter', () => {
+    const tabWidth = tab.outerWidth(true);
+    const tabPositionLeft = tab.offset().left;
+    const headerHeight = header.height();
+
+    menu.css("width", tabWidth);
+    mdcMenu.setAbsolutePosition(tabPositionLeft, headerHeight);
+    mdcMenu.setFixedPosition(true);
+    if (!mdcMenu.open) mdcMenu.open = true;
+
+})
+
+$("#my-story-tab, #my-story-menu").on('mouseleave', (event) => {
+    const currentTarget = $(event.currentTarget).attr('id');
+    const relatedTarget = $(event.relatedTarget).attr('id');
+    const remain = (currentTarget == 'my-story-tab' && relatedTarget == 'my-story-list') || (currentTarget == 'my-story-menu' && relatedTarget == 'my-story-ripple');
+
+    if (!remain) mdcMenu.open = false;
+});
+
+//////////////////
+//
+// Scroll Effects
+//
+//////////////////
+
+$(window).on('scroll', () => {
+    const scroll = $(window).scrollTop();
+    const splashFab = $("#splash-fab");
+    const purchaseFab = $("#purchase-fab");
 
     if (scroll >= 1) {
-        $(".mdc-tab-bar, .mdc-menu-my-story").addClass("tab-bar-scroll");
-        // $(".default-tab-color").toggleClass("default-tab-color default-text-scroll");
-        // $(".mdc-tab-bar .tab-bar-icon").toggleClass('tab-bar-icon default-icon');
-        // $("#logo").attr("src", "../../images/LAUX-TheAuthor-white.png");
-        // $("#logo").addClass("white-logo");
-        // $(".my-story-menu-item.default-link").addClass("tab-bar-scroll-text");
+        $("body > header, .menu-navigation").addClass("tab-bar-scroll");
     } else {
-        $(".mdc-tab-bar, .mdc-menu-my-story").removeClass("tab-bar-scroll");
-        // $(".default-text-scroll").toggleClass("default-tab-color default-text-scroll");
-        // $(".mdc-tab-bar .default-icon").toggleClass('tab-bar-icon default-icon');
-        // $("#logo").attr("src", "../../images/LAUX-TheAuthor.png");
-        // $("#logo").removeClass("white-logo");
-        // $(".my-story-menu-item.default-link").removeClass("tab-bar-scroll-text");
+        $("body > header, .menu-navigation").removeClass("tab-bar-scroll");
     }
 
     if (splashFab.length) {
         var splashFabTop = splashFab.position().top;
-    if (scroll >= splashFabTop) purchaseFab.removeClass("mdc-fab--exited");
-    else purchaseFab.addClass("mdc-fab--exited");
+        if (scroll >= splashFabTop) purchaseFab.removeClass("mdc-fab--exited");
+        else purchaseFab.addClass("mdc-fab--exited");
     }
 });
 
-$("#logo-container").hover(function(e) {
-    $(".white-logo").attr('src', '../../images/LAUX-TheAuthor-red.png');
-}, function(e) {
-    $(".white-logo").attr('src', '../../images/LAUX-TheAuthor-white.png');
-})
+//////////////////
+//
+// Submit/Validate Form
+//
+//////////////////
 
-$('.mdc-snackbar__dismiss').click(function (event) {
-    event.preventDefault();
+const subscriptionFormFields = ['first-name-subscribe', 'last-name-subscribe', 'email-subscribe'];
+const postUrl = 'https://script.google.com/macros/s/AKfycbwLAi19nJUO2QTi4r2FYltBK2raOFe22XrIB4zXt4NwgLdKw16c3ZsOAA/exec';
+
+$('.subscription-form-input').on('input click', { fields: subscriptionFormFields, buttonClass: "subscribe-btn" }, validateFields);
+$('#subscription-form').on('submit',
+    {
+        formID: "subscription-form",
+        buttonClass: "subscribe-btn",
+        formInputClass: "subscription-form-input",
+        postUrl: postUrl,
+        postQueryParameters: "subscriptions=true",
+        snackbarClass: "mdc-snackbar--success"
+    },
+    submitData
+);
+
+//////////////////
+//
+// Open/Close Announcement
+//
+//////////////////
+
+$("#announcement-banner > .close").on('click', () => {
+    $("#announcement-banner").slideUp();
+    $("#announcement-banner > .close").slideUp();
+
+    Cookies.set("hide-announcement-banner", "true", { path: '/' });
 });
 
-$('#subscribe').click(function (event) {
-    toggleProgressBar(false);
-    event.preventDefault();
-    $("#btn").attr("disabled", true);
-    var numMissing = 0;
-    var data = $('.subscribe').serializeArray().reduce(function (prev, curr) {
-        var key = curr.name;
-        var val = curr.value;
+//////////////////
+//
+// Activate Progress Bar
+//
+//////////////////
 
-        if (!prev[key]) prev[key] = val;
-
-        if (!val) numMissing++;
-
-        return prev;
-    }, {});
-
-    if (!numMissing) {
-        $.post(url + '?subscriptions=true',
-            data, function (resp, status) {
-                $('#subscription-form').trigger('reset');
-                toggleProgressBar(true);
-                successbar.open();
-            });
-    } else {
-        toggleProgressBar(true);
-        errorbar.open();
-    }
-});
-
-function toggleProgressBar(isClosed) {
-    $("#main-progress-bar").toggleClass('mdc-linear-progress--closed', isClosed);
-}
-
-$('.progress-bar-click').click(function(e) {
+$('.progress-bar-click').on('click', () => {
     toggleProgressBar(false);
 });
 
-$(document).ready(function () {
-    $("#content").hide();
-    toggleProgressBar(true);
-    $("#content").show();
+//////////////////
+//
+// Document Ready
+//
+//////////////////
 
-    if(Cookies.get("hide-announcement-banner") != "true") $("#announcement-banner:not(.permaHide)").slideDown();
+$(() => {
 
+    //////////////////
+    //
+    // Show Announcement If No Cookie
+    //
+    //////////////////
+
+    if (Cookies.get("hide-announcement-banner") != "true") $("#announcement-banner:not(.permaHide)").slideDown();
+
+    //////////////////
+    //
+    // Purchase FAB Width
+    //
+    //////////////////
+
+    // Init FAB width
     if ($(window).width() > 1100) {
         $("#purchase-fab").addClass("mdc-fab--extended");
         $("#purchase-fab .mdc-fab__label").show();
@@ -90,7 +187,8 @@ $(document).ready(function () {
         $("#purchase-fab .mdc-fab__label").hide();
     }
 
-    $(window).on('resize',function() {
+    // Adjust FAB width on resize
+    $(window).on('resize', () => {
         var width = $(window).width();
 
         if (width < 1100) {
@@ -101,5 +199,7 @@ $(document).ready(function () {
             $("#purchase-fab .mdc-fab__label").show();
         }
     })
-});
 
+    toggleProgressBar(true);
+    $("#loading-overlay").fadeOut();
+})

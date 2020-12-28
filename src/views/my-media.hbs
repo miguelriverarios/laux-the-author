@@ -1,131 +1,40 @@
-<section class="hero-container">
-    <span id="media-hero" class="hero">
-    </span>
-    <div class="hero-content">
-        <p class="small-text">My Media</p>
-        <p class="main-text">Find all my publications and<br>recordings here</p>
-    </div>
+<section class="hero">
+    <img src="../../images/photo-of-woman-reading-on-tablet-3060348.jpg" alt="{{type}} hero banner" />
+    <article>
+        <h1>My Media</h1>
+        <h2>Find all my publications and recordings here</h2>
+    </article>
 </section>
 
-<div class="all-media-container">
-    <div class="media-container">
-        <a class="default-link" href="/to-all-the-places-ive-had-sex-before">
-            <div class="icon image-and-caption" style="width:300px;">
-                <div class="image-caption">
-                    <i class="fa fa-chevron-down"></i>
-                    <div>&nbsp;Read More About It</div>
-                </div>
-                <img class="image" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg"
-                    alt="To All the Places I've Had Sex Before Book Cover" height="300px">
-            </div>
-        </a>
-        <div class="image-description">
-            <p>
-                What happens when you spend years keeping your secrets to yourself, unprocessed and unforgotten? When
-                you have obtained an identity, but you’re not sure how or why?
-            </p>
-            <p>
-                To All The Places I’ve Had Sex Before is an expirement in truth-telling. Writing it was an opportunity
-                to acknowledge the past, to contextualize it with my history and culture, and to learn from it.
-            </p>
-        </div>
-    </div>
+<div class="mdc-layout-grid--main horizontal-card-grid">
+    <div class="mdc-layout-grid__inner--main">
 
-    <div class="media-container">
-        <a class="default-link" href="https://open.spotify.com/episode/0M55xeB3ENzzCntiiztJ6V?si=9k_MPMTKT66EOfY083YO8g">
-            <div class="icon image-and-caption" style="width:300px;">
-                <div class="image-caption">
-                    <i class="fa fa-chevron-down"></i>
-                    <div>&nbsp;Listen to the Whole Episode</div>
-                </div>
-                <img class="image" src="../../images/f0164d6382991c3d2e0b38a8730cf12b97d935ff.jpg"
-                    alt="Optophobia Cover" height="300px">
+        {{#each payload}}
+        <div
+            class="grow-on-hover mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-12-desktop mdc-layout-grid__cell--main--span-8-tablet mdc-layout-grid--align-center">
+            <div class="card-container">
+                <a href="{{link}}" class="no-link-decoration">
+                    <h3 class="show-on-s">{{imageTag}}</h3>
+                    <section class="mdc-card horizontal-card fixed-width">
+                        <img src="{{image}}" alt="{{alternateText}}">
+                        <article>
+                            <header class="text-on-surface">
+                                <h3>{{imageTag}}</h3>
+                                <h4>{{dateRange}}</h4>
+                            </header>
+                            <hr />
+                            <div class="main-and-footer">
+                                <main class="text-on-surface">
+                                    {{#each description}}
+                                    <p>{{this}}</p>
+                                    {{/each}}
+                                </main>
+                            </div>
+                        </article>
+                    </section>
+                </a>
             </div>
-        </a>
-        <div class="image-description">
-            <p>
-                People are easier to control when they believe their group’s interests are at odds with another group’s. 
-                Suzy Johnson, professor of sociocultural anthropology at U.C. Berkeley, believes the U.S. 
-                government — nervous that Americans of all kinds have come together to speak as one against racism 
-                and racial injustice — is using Covfefe-19 to re-segregate the country.
-            </p>
         </div>
-    </div>
-
-    <div class="media-container">
-        <a class="default-link" href="https://www.youtube.com/watch?v=1wT1pTgaLNs&feature=youtu.be">
-            <div class="icon image-and-caption" style="width:300px;">
-                <div class="image-caption">
-                    <i class="fa fa-chevron-down"></i>
-                    <div>&nbsp;Watch the Whole Episode</div>
-                </div>
-                <img class="image" src="../../images/rayceen.png"
-                    alt="Rayceen Pendarvis Headshot" height="300px">
-            </div>
-        </a>
-        <div class="image-description">
-            <p>
-                Semi-weekly Facebook Live event about sex, sexuality, sensuality, lust, attraction, passion, pleasure, and more, hosted by Rayceen Pendarvis.
-            </p>
-        </div>
-    </div>
-
-    <div class="media-container">
-        <a class="default-link" href="https://medium.com/@lauxtheauthor">
-            <div class="icon image-and-caption">
-                <div class="image-caption">
-                    <i class="fa fa-chevron-down"></i>
-                    <div>&nbsp;Check Out the Teaser Series Below</div>
-                </div>
-                <img class="image" src="../../images/medium.png" alt="Medium Logo" height="300px">
-            </div>
-        </a>
-        <div class="image-description">
-            <p>
-                Can't wait to have her book in your hands? Check out this teaser series on Medium.
-            </p>
-        </div>
-    </div>
-
-    <div class="media-container">
-        <a class="default-link" href="https://comedicpursuits.com/lauren-jordan-laux/">
-            <div class="icon image-and-caption">
-                <div class="image-caption">
-                    <i class="fa fa-chevron-down"></i>
-                    <div>&nbsp;Listen to the Whole Episode</div>
-                </div>
-                <img class="image" src="../../images/pussAndKooch.png" alt="Puss and Kooch Logo" height="300px">
-            </div>
-        </a>
-        <div class="image-description">
-            <p>
-                Improviser Lauren Jordan, author name LAUX, sits down with podcast hosts Puss and Kooch to talk about
-                her new book, To All the Places I’ve Had Sex Before, traveling book clubs, and why we should all be in
-                therapy.
-            </p>
-        </div>
-    </div>
-
-    <div class="media-container">
-        <a class="default-link" href="https://www.publiclysexy.com/post/season-of-sincerity-introduction">
-            <div class="icon image-and-caption" style="width:300px;">
-                <div class="image-caption">
-                    <i class="fa fa-chevron-down"></i>
-                    <div>&nbsp;Want More? Check this Out</div>
-                </div>
-                <div class="image mdc-card" style="border-radius: 0px;width:300px;">
-                    <img src="../../images/publicly-sexy.webp" alt="Publicly Sexy Logo Logo" width="300px">
-                </div>
-            </div>
-        </a>
-        <div class="image-description">
-            <p>
-                <span style="color:#F2E4B1">Season of Sincerity Introduction &mdash; </span> Earlier this month, a friend confided in me an idea she had for
-                a new project. She came to me because I had worked on a similar project before. However, when I looked
-                over her proposal I found it riddled with mistakes and gaps in logic. Do I tell her the truth and risk
-                her losing her confidence? Or should I be nice and risk her failing? These two things are not mutually
-                exclusive, but I often find myself thinking that they are.
-            </p>
-        </div>
+        {{/each}}
     </div>
 </div>

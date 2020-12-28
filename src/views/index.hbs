@@ -1,19 +1,12 @@
-{{!-- <section class="fill-screen"> --}}
-<section style="height:calc(100vh - 52px);padding:0;position:relative;background-color:#F3B534;">
-  <div id="left-splash" style="left:0;position:absolute;top:0;right:0;bottom:0;z-index:1;">
-    <span
-      style="background-image:url('../../images/LAUX-color/LAUX-color/main-bg.png');position:absolute;left:0;top:0;right:0;bottom:0;display:block;background-size:contain;background-repeat:no-repeat;">
-    </span>
+<section id="splash-page">
+  <div id="left-splash">
+    <span></span>
   </div>
-  <div id="lines-splash" style="left:0;position:absolute;top:0;right:0;bottom:0;z-index:2;">
-    <span
-      style="background-image:url('../../images/LAUX-color/LAUX-color/lines-bg.png');position:absolute;left:0;top:0;right:0;bottom:0;display:block;background-size:contain;background-repeat:no-repeat;">
-    </span>
+  <div id="lines-splash">
+    <span></span>
   </div>
-  <div id="hero-logo-container" style="position:absolute;top:0;right:0;bottom:0;">
-    <span id="hero-logo"
-      style="background-image:url('../../images/book-cover-light.png');position:absolute;left:0;top:0;right:0;bottom:0;display:block;background-position:center;">
-    </span>
+  <div id="hero-logo">
+    <span></span>
   </div>
 
   <div class="descriptors">
@@ -34,73 +27,70 @@
     </div>
 
     <a id="splash-fab" href="/purchase-your-copy"
-    class="mdc-fab mdc-fab--extended progress-bar-click" data-mdc-auto-init="MDCRipple">
-    <div class="mdc-fab__ripple"></div>
-    <span class="mdc-fab__label">Purchase Your Copy</span>
-  </a> 
+      class="mdc-fab mdc-fab--extended progress-bar-click mdc-theme--primary-bg" data-mdc-auto-init="MDCRipple">
+      <div class="mdc-fab__ripple"></div>
+      <span class="mdc-fab__label">Purchase Your Copy</span>
+    </a>
   </div>
-
-
-  {{!-- <img class="fill-screen" id="left-image" src="../../images/laux-landing-page.png" alt="Laux Logo" width="80%"> --}}
-
-  {{!-- <img class="fill-screen" id="right-image" src="../../images/book-cover.jpg" alt="Book Cover" width="100%"> --}}
 
 </section>
 
-<div id="social-media-marquee-container">
-  {{!-- <div id="social-media-marquee-banner">
-    Click Here
-  </div> --}}
-  <div id="social-media-marquee">
+<section id="social-media-marquee">
 
-    {{#each socialMediaPosts}}
-    <a class="marquee-item default-link" href="{{linkToPost}}" style="{{style}}">
-      <div class="username">{{username}} via {{platform}}</div>
+  {{#each payload}}
+  <a href="{{linkToPost}}" class="default-link">
+    <header><h3><i class="{{classes}} fab fa-{{platform}}"></i>&nbsp;{{username}}</h3></header>
 
-      {{#if isImage}}
-      <img class="social-media-image" src="{{image}}" alt="{{altText}}">
-      {{else}}
-      <div>{{post}}</div>
-      {{/if}}
+    {{#if isImage}}
+    <img src="{{image}}" alt="{{altText}}">
+    {{else}}
+    <article>{{post}}</article>
+    {{/if}}
 
-      <div class="timestamp">{{timestamp}}</div>
-    </a>
-    {{/each}}
-  </div>
-</div>
-
-<div id="highlights">
-
-  <a class="default-link highlights-link" href="/to-all-the-places-ive-had-sex-before">
-    <div class="icon image-and-caption">
-      <div class="image-caption">
-        <i class="fa fa-chevron-down"></i>
-        <div>&nbsp;Read More About It</div>
-      </div>
-
-      <img class="image" src="../../images/to-all-the-places-i-ve-had-sex-before.jpg" alt="To All the Places I've Had Sex Cover"
-        height="300px">
-    </div>
+    <footer><h5><i>{{timestamp}}</i></h5></footer>
   </a>
-  <div>
-    <div class="image-description">
-      <i class="fa fa-quote fa-quote-left mdc-theme--primary fa-3x" aria-hidden="true"
-        style="align-self: flex-start;"></i>
-      <div>
-        <p>
-          LAUX’s stories on Black Womanhood and Sexual Liberation are for RIGHT NOW. Her voice is one for a generation;
-          a sexual liberation unto itself is found between the lines in her collection of exhilaratingly honest and
-          personal essays, allowing the reader to redefine and deconstruct them self alongside LAUX as she unpacks these
-          loaded and multilayered institutions and mentalities.
-        </p>
-        <p class="quote-attribution">
-          Katy Rieber<br/>
-          <i>The Bird Streets</i>
-        </p>
-      </div>
-      <i class="fa fa-quote fa-quote-right mdc-theme--primary fa-3x" aria-hidden="true"
-        style="align-self: flex-end;"></i>
+  {{/each}}
+</section>
+
+<div class="mdc-layout-grid--main">
+  <div class="mdc-layout-grid__inner--main">
+    <div
+      class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-4-desktop mdc-layout-grid--align-center highlights">
+
+      <a class="default-link" href="/to-all-the-places-ive-had-sex-before">
+        <div class="image-caption">
+          <i class="fa fa-chevron-down"></i>
+          <div>&nbsp;Read More About It</div>
+        </div>
+
+        <img src="../../images/to-all-the-places-i-ve-had-sex-before.jpg" alt="To All the Places I've Had Sex Cover"
+          height="300px">
+      </a>
+    </div>
+
+    <div class="mdc-layout-grid__cell--main mdc-layout-grid__cell--main--span-8-desktop mdc-layout-grid--align-center">
+      <section class="text-on-background quote">
+        <i class="fa fa-quote fa-quote-left fa-3x" aria-hidden="true"></i>
+        <article>
+          <main>
+            <p>
+              LAUX’s stories on Black Womanhood and Sexual Liberation are for RIGHT NOW. Her voice is one for a
+              generation;
+              a sexual liberation unto itself is found between the lines in her collection of exhilaratingly honest and
+              personal essays, allowing the reader to redefine and deconstruct them self alongside LAUX as she unpacks
+              these
+              loaded and multilayered institutions and mentalities.
+            </p>
+          </main>
+          <footer>
+            <p>
+              Katy Rieber<br />
+              The Bird Streets
+            </p>
+          </footer>
+        </article>
+        <i class="fa fa-quote fa-quote-right fa-3x" aria-hidden="true"></i>
+      </section>
     </div>
   </div>
-
 </div>

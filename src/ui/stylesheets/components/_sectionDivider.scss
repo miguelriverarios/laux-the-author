@@ -1,0 +1,35 @@
+@use "utilities" as util;
+@use "vendors" as vend;
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin: 1em 0;
+    color: util.$var-secondary-color;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+.separator::before,
+.separator::after {
+    content: "";
+    flex: 1;
+    border-bottom: 3px double util.$var-secondary-color;
+}
+.separator::before {
+    margin-right: 0.25em;
+}
+.separator::after {
+    margin-left: 0.25em;
+}
+
+.rounded-seperator {
+    @include util.mix-flex();
+    
+    div {
+        border-top: 8px solid rgba(util.$var-secondary-color, 0.6);
+        border-radius: 5px;
+        width: 70%;
+    }
+}

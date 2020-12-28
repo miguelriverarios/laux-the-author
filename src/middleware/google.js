@@ -1,20 +1,14 @@
-const {google} = require('googleapis');
-const privatekey = require("./privatekey.json");
+const { google } = require('googleapis');
+const sheets = google.sheets('v4');
+const jwtClient = require('./jwtClient');
+const spID = '1_8YPlzCSCGcnNV0Wcg1h5SISgrhw2hrLJGE6KeqK6kk';
 
-//configure a JWT auth client
-let jwtClient = new google.auth.JWT(
-  privatekey.client_email,
-  null,
-  privatekey.private_key,
-  ['https://www.googleapis.com/auth/spreadsheets']);
-//authenticate request
-jwtClient.authorize(function (err, tokens) {
-  if (err) {
-    console.log(err);
-    return;
-  } else {
-    console.log("Successfully connected!");
-  }
-});
+const googleConnection = (sheetName) => {
+    return sheets.spreadsheets.values.get({
+        auth: jwtClient,
+        spreadsheetId: spID,
+        range: sheetName
+    });
+}
 
-module.exports = jwtClient;
+module.exports = googleConnection;

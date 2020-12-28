@@ -1,0 +1,98 @@
+@use "../utilities" as util;
+@use "../vendors" as vend;
+
+@media (min-width: 1100px) {
+    #purchase-fab {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+    .overflow-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 1100px) {
+    .pipe-navigation {
+        display: none;
+    }
+    .descriptors {
+        right: 2em;
+        text-align: right;
+    }
+    .final-descriptor{
+        color: util.$var-on-secondary-color;
+    }
+    #mybook {
+        font-size: 0.8rem;
+    }
+}
+
+* {
+    outline: 0;
+}
+
+html {
+    @include util.mix-responsive(
+        "font-size",
+        11px,
+        (
+            "xs": 12px,
+            450px: 13px,
+            1100px: 14px,
+            "l": 15px,
+            1600px: 16px,
+            "ipad": 14px,
+        )
+    );
+}
+
+body {
+    @include vend.theme-property(background-color, util.$var-background-color);
+    margin: 0;
+    overflow-x: hidden;
+
+    & > header {
+        background-color: util.$var-dark-background-color;
+    }
+}
+
+.hide-scroll {
+    overflow: hidden;
+}
+
+.pipe {
+    color: util.$var-primary-color;
+}
+
+.slick-initialized .slick-slide {
+    @include util.mix-flex(column, flex-start, space-evenly);
+}
+
+.fill-screen {
+    height: calc(100vh - 52px);
+}
+
+.disabled-anchor {
+    cursor: default;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.social-media-buttons {
+    @include util.mix-flex;
+}
+
+.close {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
